@@ -153,7 +153,7 @@
             document.body.removeChild(downloadLink);
         });
 
-        document.getElementById('downloadSvg').addEventListener('click', () => {
+        document.getElementById('downloadSvg').addEventListener('click', async () => {
             const width = 800;
             const height = 600;
             const result = cirkel.main();
@@ -176,7 +176,31 @@
             a.target = '_blank';
             a.click();
             window.URL.revokeObjectURL(url);
+
+            await uploadSvg(svg);
+
+            // document.location = '/thanks'
         });
+
+        async function uploadSvg(svg) {
+            // Upload to AWS
+            const filename = Math.random().toString(36).substring(7) + '.svg';
+            const url = `https://dangerbuck.s3.eu-north-1.amazonaws.com/uploads/${filename}`;
+            console.log(filename)
+            const response = await fetch(url, {
+                method: 'PUT',
+                body: svg,
+                headers: {
+                    'Content-Type': 'image/svg+xml'
+                }
+            });
+
+            if (response.ok) {
+                console.log('SVG data uploaded successfully.');
+            } else {
+                console.error('Failed to upload SVG data.');
+            }
+        }
 
 
         async function prepareDropzone() {
