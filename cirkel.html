@@ -57,6 +57,7 @@
         </label>
     </div>
     <button id="downloadBtn">Download Image</button>
+    <button id="downloadSvg">Download SVG</button>
 
 
 
@@ -150,6 +151,31 @@
             document.body.appendChild(downloadLink);
             downloadLink.click();
             document.body.removeChild(downloadLink);
+        });
+
+        document.getElementById('downloadSvg').addEventListener('click', () => {
+            const width = 800;
+            const height = 600;
+            const result = cirkel.main();
+            var svg = g._toSVG(result, {
+                header: true,
+                x: -width / 2,
+                y: -height / 2,
+                width: width,
+                height: height,
+            });
+
+            var fileName = 'test.svg';
+            var blob = new Blob([svg], { type: 'image/svg+xml' });
+            var url = window.URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            document.body.appendChild(a);
+            a.style.display = 'none';
+            a.href = url;
+            a.download = fileName;
+            a.target = '_blank';
+            a.click();
+            window.URL.revokeObjectURL(url);
         });
 
 
