@@ -6,13 +6,14 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC7vCcbE7ywd4z9uLqGeJtQKopTX-BgstI",
-  authDomain: "emrg-codestudio.firebaseapp.com",
-  databaseURL: "https://emrg-codestudio.firebaseio.com",
-  projectId: "emrg-codestudio",
-  storageBucket: "emrg-codestudio.appspot.com",
-  messagingSenderId: "715945437596",
-  appId: "1:715945437596:web:f309eea784fa8c29474059",
+  apiKey: "AIzaSyBp00MZ3SNa5ezQK5tHzc5pZQqAD35gUvs",
+  authDomain: "axidrawer.firebaseapp.com",
+  databaseURL: "https://axidrawer.firebaseio.com",
+  projectId: "axidrawer",
+  storageBucket: "axidrawer.appspot.com",
+  messagingSenderId: "525544006556",
+  appId: "1:525544006556:web:3c1bef55090fbd3fc0de59",
+  measurementId: "G-TJDT1J0GC7",
 };
 
 const app = initializeApp(firebaseConfig);
