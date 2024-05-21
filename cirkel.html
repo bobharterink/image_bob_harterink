@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link id="favicon" rel="icon" href="favicon1.ico?v=2" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Door het oog van de maker</title>
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@6.0.0-beta.2/dist/dropzone.css" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="loading-screen">
+        <div class="outer-circle">
+            <div class="middle-circle">
+                <div class="inner-circle"></div>
+            </div>
+        </div>
+        <div class="text-container">
+            <div class="text">Door het oog van de maker</div>
+        </div>
+    </div>
+    <div class="cover-screen"></div>
+    <div id="content" style="display: none;">
+        <nav>
+            <div class="logo-title">
+                <img id="logo" src="" alt="Logo" class="logo">
+                <span class="site-title">Door het oog van de maker</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="cirkel.html">Cirkel</a>
+                <a href="imagegrid.html">Imagegrid</a>
+            </div>
+        </nav>
+        <div class="main-wrapper">
+            <div class="main-content">
+                <canvas width="800" height="595" id="mycanvas"></canvas>
+                <div class="sidebar">
+                    <div id="drop_zone" class="disabled dropzone">
+                        <div class="dz-message" data-dz-message><span>Drop files here to upload <br>(Max 1920*1080)</span></div>
+                    </div>
+                    <div class="controls">
+                        <label>Density dots: <input type="range" min="10" max="100" step="1" oninput="dotDensity(this)"></label>
+                        <label>Dot size: <input type="range" min="1" max="50" step="1" oninput="changedotSize(this)"></label>
+                        <label>Dot color: 
+                            <select oninput="changedotColor(this)">
+                                <option value="#ff0000">Red</option>
+                                <option value="#00ff00">Green</option>
+                                <option value="#0000ff">Blue</option>
+                                <option value="#ffff00">Yellow</option>
+                                <option value="#ff00ff">Magenta</option>
+                            </select>
+                        </label>
+                        <label>
+                            <input type="checkbox" id="modeToggle" checked onchange="changedotColor2()">
+                            Modify Stroke (Uncheck for Fill)
+                        </label>
+                        <label>Color: 
+                            <select id="colorPicker" oninput="changedotColor2()">
+                                <option value="#ff0000">Red</option>
+                                <option value="#00ff00">Green</option>
+                                <option value="#0000ff">Blue</option>
+                                <option value="#ffff00">Yellow</option>
+                                <option value="#ff00ff">Magenta</option>
+                            </select>
+                        </label>                        <label>
+                            <input type="checkbox" id="uniformScaling" checked>
+                            Uniform Scaling
+                        </label>
+                        <div id="scaleControls">
+                            <label>Frame size (uniform):
+                                <input id="scaleUniform" type="range" min="0.1" max="2" step="0.01" value="1" oninput="changeframeSize(true)">
+                            </label>
+                        </div>
+                        <div id="nonUniformScaleControls" style="display: none;">
+                            <label>X Scale:
+                                <input id="scaleX" type="range" min="0.1" max="2" step="0.01" value="1" oninput="changeframeSize(false)">
+                            </label>
+                            <label>Y Scale:
+                                <input id="scaleY" type="range" min="0.1" max="2" step="0.01" value="1" oninput="changeframeSize(false)">
+                            </label>
+                        </div>
+                        <button id="downloadBtn">Download Image</button>
+                        <button id="downloadSvg">Download SVG</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://unpkg.com/dropzone@6.0.0-beta.2/dist/dropzone-min.js"></script>
+        <script src="https://nodebox.live/api/v1/ndbx.js"></script>
+        <script type="module" src="cirkel.js"></script>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
