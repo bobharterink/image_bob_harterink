@@ -96,26 +96,9 @@ function changeframeSize(isUniform) {
 }
 window.changeframeSize = changeframeSize;
 
-document.getElementById("downloadBtn").addEventListener("click", function () {
-  const canvas = document.getElementById("mycanvas");
-  const image = canvas
-    .toDataURL("image/png")
-    .replace("image/png", "image/octet-stream"); // This changes the MIME type to download
-
-  // Create a temporary link to initiate the download
-  let downloadLink = document.createElement("a");
-  downloadLink.href = image;
-  downloadLink.download = "canvas_image.png";
-
-  // Append the link to the document body temporarily and trigger the click event to start download
-  document.body.appendChild(downloadLink);
-  downloadLink.click();
-  document.body.removeChild(downloadLink);
-});
-
 document.getElementById("downloadSvg").addEventListener("click", async () => {
   const width = 800;
-  const height = 600;
+  const height = 595;
   const result = cirkel.main();
   var svg = g._toSVG(result, {
     header: true,
