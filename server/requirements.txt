@@ -1,4 +1,0 @@
-Flask==3.0.3
-webcolors==1.13
-# https://axidraw.com/doc/py_api/#installation
-https://cdn.evilmadscientist.com/dl/ad/public/AxiDraw_API.zip
