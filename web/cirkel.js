@@ -97,9 +97,10 @@ function changeframeSize(isUniform) {
 window.changeframeSize = changeframeSize;
 
 document.getElementById("downloadSvg").addEventListener("click", async () => {
-  const width = 800;
-  const height = 595;
+  const width = 800 / 1.5;
+  const height = 595 / 1.5;
   const result = cirkel.main();
+
   var svg = g._toSVG(result, {
     header: true,
     x: -width / 2,
@@ -108,8 +109,24 @@ document.getElementById("downloadSvg").addEventListener("click", async () => {
     height: height,
   });
 
+  // Create a new XML document to manipulate the SVG
+  const parser = new DOMParser();
+  const svgDoc = parser.parseFromString(svg, "image/svg+xml");
+  const svgElement = svgDoc.documentElement;
+
+  // Add a scaling transformation to resize the contents
+  const transform = svgDoc.createElementNS("http://www.w3.org/2000/svg", "g");
+  transform.setAttribute("transform", "scale(0.7)");
+  while (svgElement.firstChild) {
+    transform.appendChild(svgElement.firstChild);
+  }
+  svgElement.appendChild(transform);
+
+  // Serialize the modified SVG document to a string
+  const modifiedSvg = new XMLSerializer().serializeToString(svgDoc);
+
   var fileName = "test.svg";
-  var blob = new Blob([svg], { type: "image/svg+xml" });
+  var blob = new Blob([modifiedSvg], { type: "image/svg+xml;charset=utf-8" });
   var url = window.URL.createObjectURL(blob);
   var a = document.createElement("a");
   document.body.appendChild(a);
@@ -120,9 +137,7 @@ document.getElementById("downloadSvg").addEventListener("click", async () => {
   a.click();
   window.URL.revokeObjectURL(url);
 
-  await uploadSvg(svg);
-
-  // document.location = '/thanks'
+  await uploadSvg(modifiedSvg);
 });
 
 async function uploadSvg(svg) {

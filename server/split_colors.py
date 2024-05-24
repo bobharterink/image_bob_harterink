@@ -1,20 +1,15 @@
 import re
 import os
 import webcolors
-
-
 import math
-
 
 def hex_to_rgb(hex_color):
     return webcolors.hex_to_rgb(hex_color)
-
 
 def rgb_distance(rgb1, rgb2):
     r1, g1, b1 = rgb1
     r2, g2, b2 = rgb2
     return math.sqrt((r2 - r1) ** 2 + (g2 - g1) ** 2 + (b2 - b1) ** 2)
-
 
 def find_closest_color(hex_color):
     rgb_color = hex_to_rgb(hex_color)
@@ -31,7 +26,6 @@ def find_closest_color(hex_color):
             closest_color = named_color
 
     return closest_color
-
 
 def split_colors(filename):
     # Open the SVG file and read its contents
@@ -71,7 +65,7 @@ def split_colors(filename):
             output_filename = f"{os.path.splitext(filename)[0]}_{color_name}.svg"
             with open(output_filename, "w") as f:
                 f.write(svg_header + "\n")
-                f.write("<g>\n")
+                f.write('<g transform="scale(0.7)">\n')
                 for path in paths:
                     f.write(path + "\n")
                 f.write("</g>\n")
@@ -86,7 +80,6 @@ def split_colors(filename):
     else:
         print(f"Invalid SVG format in {filename}. Unable to split.")
         return []
-
 
 # Example usage
 if __name__ == "__main__":
