@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link id="favicon" rel="icon" href="favicon1.ico?v=2" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Door het oog van de maker</title>
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@6.0.0-beta.2/dist/dropzone.css" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="loading-screen">
+        <div class="outer-circle">
+            <div class="middle-circle">
+                <div class="inner-circle"></div>
+            </div>
+        </div>
+        <div class="text-container">
+            <div class="text">Door het oog van de maker</div>
+        </div>
+    </div>
+    <div class="cover-screen"></div>
+    <div id="content" style="display: none;">
+        <nav>
+            <div class="logo-title">
+                <img id="logo" src="" alt="Logo" class="logo">
+                <span class="site-title">Door het oog van de maker</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" data-transition="auto">
+                    <svg id="b" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="100" height="26.064" viewBox="0 0 200 52.128"><g id="c" data-name="Layer 1"><path d="m1.648 30.041 30.235 13.74c15.962 7.254 34.592 5.366 48.774 -4.942l35.151 -25.549C132.42 1.216 154.819 0.861 171.804 12.403l25.956 17.638" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="7.968376792350601"/></g></svg>
+                </a>
+                
+                
+                
+                <a href="cirkel.html" data-transition="auto">
+                    <svg id="b" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="-2 -2 54 54">
+                        <g id="c" data-name="Layer 1">
+                            <circle cx="25" cy="25" r="24" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="4" />
+                        </g>
+                    </svg>
+                                    <a href="hoek.html" data-transition="auto">
+                    <svg id="b" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="100" height="26.486" viewBox="0 0 100 26.486"><g id="c" data-name="Layer 1"><path points="518.393 79.737 377.721 126.891 150.64 11.611 4.41 79.737" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="4.002982494139476" d="M99.364 15.284L72.4 24.322L28.874 2.226L0.845 15.284"/></g></svg>
+                </a>
+            </div>
+        </nav>
+        <div class="main-wrapper">
+            <div class="main-content">
+                <canvas width="800" height="595" id="mycanvas"></canvas>
+                <div class="sidebar">
+                    <div id="drop_zone" class="disabled dropzone">
+                        <div class="dz-message" data-dz-message><span>Drop files here to upload <br>(Max 1920*1080)</span></div>
+                    </div>
+                    <div class="controls">
+                        <label>Density dots: <input type="range" min="10" max="100" step="1" oninput="dotDensity(this)"></label>
+                        <label>Dot size: <input type="range" min="1" max="50" step="1" oninput="changedotSize(this)"></label>
+                        <label>Dot color: 
+                            <select oninput="changedotColor(this)">
+                                <option value="#ff0000">Red</option>
+                                <option value="#00ff00">Green</option>
+                                <option value="#0000ff">Blue</option>
+                                <option value="#ffff00">Yellow</option>
+                                <option value="#ff00ff">Magenta</option>
+                            </select>
+                        </label>
+                        <label>
+                            <input type="checkbox" id="modeToggle" checked onchange="changedotColor2()">
+                            Modify Stroke (Uncheck for Fill)
+                        </label>
+                        <label>Color: 
+                            <select id="colorPicker" oninput="changedotColor2()">
+                                <option value="#ff0000">Red</option>
+                                <option value="#00ff00">Green</option>
+                                <option value="#0000ff">Blue</option>
+                                <option value="#ffff00">Yellow</option>
+                                <option value="#ff00ff">Magenta</option>
+                            </select>
+                        </label>                        <label>
+                            <input type="checkbox" id="uniformScaling" checked>
+                            Uniform Scaling
+                        </label>
+                        <div id="scaleControls">
+                            <label>Frame size (uniform):
+                                <input id="scaleUniform" type="range" min="0.1" max="2" step="0.01" value="1" oninput="changeframeSize(true)">
+                            </label>
+                        </div>
+                        <div id="nonUniformScaleControls" style="display: none;">
+                            <label>X Scale:
+                                <input id="scaleX" type="range" min="0.1" max="2" step="0.01" value="1" oninput="changeframeSize(false)">
+                            </label>
+                            <label>Y Scale:
+                                <input id="scaleY" type="range" min="0.1" max="2" step="0.01" value="1" oninput="changeframeSize(false)">
+                            </label>
+                        </div>
+                        <button id="downloadSvg">Laten Maken!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://unpkg.com/dropzone@6.0.0-beta.2/dist/dropzone-min.js"></script>
+        <script src="https://nodebox.live/api/v1/ndbx.js"></script>
+        <script type="module" src="cirkel.js"></script>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const links = document.querySelectorAll('a[data-transition]');
+        
+            links.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+        
+                    if (!document.startViewTransition) {
+                        // Fallback for browsers that don't support the View Transition API
+                        window.location.href = link.href;
+                        return;
+                    }
+        
+                    const url = link.href;
+        
+                    document.startViewTransition(() => {
+                        return fetch(url)
+                            .then(response => response.text())
+                            .then(html => {
+                                const parser = new DOMParser();
+                                const doc = parser.parseFromString(html, 'text/html');
+                                document.documentElement.replaceChild(doc.body, document.body);
+                                document.documentElement.replaceChild(doc.querySelector('head'), document.querySelector('head'));
+                                history.pushState(null, '', url);
+                                document.dispatchEvent(new Event('DOMContentLoaded'));
+                            })
+                            .catch(err => {
+                                console.warn('Failed to load page:', err);
+                                window.location.href = url; // Fallback if fetch fails
+                            });
+                    });
+                });
+            });
+        });
+        </script>
+        
+</body>
+</html>
