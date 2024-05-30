@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link id="favicon" rel="icon" href="favicon1.ico?v=2" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procesfolio</title>
+    <link rel="stylesheet" href="styles2.css">
+    <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="loading-screen">
+        <div class="outer-circle">
+            <div class="middle-circle">
+                <div class="inner-circle"></div>
+            </div>
+        </div>
+        <div class="text-container">
+            <div class="text">Door het oog van de maker</div>
+        </div>
+    </div>
+    <div class="cover-screen"></div>
+    <div id="content" style="display: none;">
+    <header>
+        <nav class="main-nav">
+            <div class="logo-title">
+                <img id="logo" src="" alt="Logo" class="logo">
+                <span class="site-title">Door het oog van de maker</span>
+            </div>
+        </nav>
+    </header>
+    <aside>
+        <nav class="sidebar-nav">
+            <a href="#" class="dropdown-toggle nav-header">
+                <i class="em em-wave" aria-role="presentation" aria-label="WAVING HAND SIGN"></i>
+                <span class="title-nav">Introduction</span>
+            </a>
+            <h1 class="nav-title">Getting Started</h1>
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle nav-header basics-link">
+                    <i class="em em-gear" aria-role="presentation" aria-label=""></i>
+                    <span class="title-nav">Basics</span>
+                    <i class="arrow"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="#declarative">Configuration Options</a>
+                    <a href="#imperative">Layout</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle nav-header basics-link">
+                    <i class="em em-gear" aria-role="presentation" aria-label=""></i>
+                    <span class="title-nav">Basics</span>
+                    <i class="arrow"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="#declarative">Configuration Options</a>
+                    <a href="#imperative">Layout</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle nav-header basics-link">
+                    <i class="em em-gear" aria-role="presentation" aria-label=""></i>
+                    <span class="title-nav">Basics</span>
+                    <i class="arrow"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="#declarative">Configuration Options</a>
+                    <a href="#imperative">Layout</a>
+                </div>
+            </div>
+            <h1 class="nav-title">Configuration</h1>
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle nav-header basics-link">
+                    <i class="em em-gear" aria-role="presentation" aria-label=""></i>
+                    <span class="title-nav">Basics</span>
+                    <i class="arrow"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="#declarative">Configuration Options</a>
+                    <a href="#imperative">Layout</a>
+                </div>
+            </div>
+        </nav>
+    </aside>
+    
+    <main>
+        <h1>Dropzone Configuration Basics</h1>
+        <p>In this section, we'll go over the fundamentals of configuring Dropzones.</p>
+
+        <h2 id="declarative">Declarative</h2>
+        <pre>
+            &lt;form action="/target" class="dropzone" id="my-great-dropzone"&gt;&lt;/form&gt;
+
+            &lt;script&gt;
+            Dropzone.options.myGreatDropzone = {
+                paramName: "file",
+                maxFilesize: 2,
+                accept: function(file, done) {
+                    if (file.name == "justinbieber.jpg") {
+                        done("Naha, you don't.");
+                    } else {
+                        done();
+                    }
+                }
+            };
+            &lt;/script&gt;
+        </pre>
+
+        <h2 id="imperative">Imperative</h2>
+        <pre>
+            import Dropzone from "dropzone";
+
+            let myDropzone = new Dropzone("#my-element", {
+                paramName: "file",
+                maxFilesize: 2,
+                accept: function(file, done) {
+                    if (file.name == "justinbieber.jpg") {
+                        done("Naha, you don't.");
+                    } else {
+                        done();
+                    }
+                }
+            });
+        </pre>
+
+        <h2 id="events">Events</h2>
+        <p>To react to events happening, you need to listen to events. Check out the events section for more information.</p>
+
+        <h2 id="overriding-default-event-handlers">Overriding Default Event Handlers</h2>
+        <pre>
+            let myDropzone = new Dropzone("#my-element", {
+                addedfile: file => {
+                    // ONLY DO THIS IF YOU KNOW WHAT YOU'RE DOING!
+                }
+            });
+        </pre>
+
+        <p>For a list of all possible options, refer to the options.js file.</p>
+    </main>
+</div>
+
+    <script src="script2.js"></script>
+    <script src="script.js"></script>
+    
+</body>
+</html>

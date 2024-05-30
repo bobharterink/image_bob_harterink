@@ -24,11 +24,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Mapping between logo images and colors
   const logoImages = [
-    { src: "Door_Het_Oog1.png", color: "#ed1c40", favicon: "favicon1.ico?v=3" },
-    { src: "Door_Het_Oog2.png", color: "#1c88ed", favicon: "favicon2.ico?v=2" },
-    { src: "Door_Het_Oog3.png", color: "#1ced6b", favicon: "favicon3.ico?v=2" },
-    { src: "Door_Het_Oog4.png", color: "#ed1cae", favicon: "favicon4.ico?v=2" },
-    { src: "Door_Het_Oog5.png", color: "#edb71c", favicon: "favicon5.ico?v=2" },
+    {
+      src: "Door_Het_Oog1.png",
+      color: "#ed1c40",
+      secondaryColor: "#ffe6ea",
+      favicon: "favicon1.ico?v=3",
+    },
+    {
+      src: "Door_Het_Oog2.png",
+      color: "#1c88ed",
+      secondaryColor: "#d9edff",
+      favicon: "favicon2.ico?v=2",
+    },
+    {
+      src: "Door_Het_Oog3.png",
+      color: "#1ced6b",
+      secondaryColor: "#e6ffef",
+      favicon: "favicon3.ico?v=2",
+    },
+    {
+      src: "Door_Het_Oog4.png",
+      color: "#ed1cae",
+      secondaryColor: "#ffe6f7",
+      favicon: "favicon4.ico?v=2",
+    },
+    {
+      src: "Door_Het_Oog5.png",
+      color: "#edb71c",
+      secondaryColor: "#fff8e6",
+      favicon: "favicon5.ico?v=2",
+    },
   ];
 
   // Randomly select logo image and corresponding color
@@ -36,4 +61,10 @@ document.addEventListener("DOMContentLoaded", function () {
   favicon.href = randomLogo.favicon;
   document.getElementById("logo").src = randomLogo.src;
   outerCircle.style.backgroundColor = randomLogo.color;
+
+  // Update the background color of pre elements
+  const preElements = document.querySelectorAll("pre");
+  preElements.forEach((pre) => {
+    pre.style.backgroundColor = randomLogo.secondaryColor;
+  });
 });

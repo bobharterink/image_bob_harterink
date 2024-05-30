@@ -30,21 +30,9 @@
                 <span class="site-title">Door het oog van de maker</span>
             </div>
             <div class="nav-links">
-                <a href="index.html" data-transition="auto">
-                    <svg id="b" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="100" height="26.064" viewBox="0 0 200 52.128"><g id="c" data-name="Layer 1"><path d="m1.648 30.041 30.235 13.74c15.962 7.254 34.592 5.366 48.774 -4.942l35.151 -25.549C132.42 1.216 154.819 0.861 171.804 12.403l25.956 17.638" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="7.968376792350601"/></g></svg>
-                </a>
-                
-                
-                
-                <a href="cirkel.html" data-transition="auto">
-                    <svg id="b" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="-2 -2 54 54">
-                        <g id="c" data-name="Layer 1">
-                            <circle cx="25" cy="25" r="24" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="4" />
-                        </g>
-                    </svg>
-                                    <a href="hoek.html" data-transition="auto">
-                    <svg id="b" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="100" height="26.486" viewBox="0 0 100 26.486"><g id="c" data-name="Layer 1"><path points="518.393 79.737 377.721 126.891 150.64 11.611 4.41 79.737" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="4.002982494139476" d="M99.364 15.284L72.4 24.322L28.874 2.226L0.845 15.284"/></g></svg>
-                </a>
+                <a href="index.html" data-transition="auto">Golf</a>  
+                <a href="cirkel.html" data-transition="auto">Cirkel</a>
+                <a href="hoek.html" data-transition="auto">Hoek</a>
             </div>
         </nav>
         <div class="main-wrapper">
@@ -54,6 +42,13 @@
                     <div id="drop_zone" class="disabled dropzone">
                         <div class="dz-message" data-dz-message><span>Drop files here to upload <br>(Max 1920*1080)</span></div>
                     </div>
+<!-- Modal Structure -->
+<div id="cameraModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <video id="camera" autoplay style="width: 100%; filter: blur(10px);"></video>
+        <button id="captureButton">Capture Image</button>
+    </div>
+</div>
                     <div class="controls">
                         <label>Density dots: <input type="range" min="10" max="100" step="1" oninput="dotDensity(this)"></label>
                         <label>Dot size: <input type="range" min="1" max="50" step="1" oninput="changedotSize(this)"></label>
@@ -141,6 +136,6 @@
             });
         });
         </script>
-        
+
 </body>
 </html>

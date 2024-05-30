@@ -181,6 +181,7 @@ async function prepareDropzone() {
   let myDropzone = new Dropzone("#drop_zone", {
     url: url,
     method: "put",
+    clickable: false,
     binaryBody: true,
     acceptedFiles: "image/jpeg",
     accept: function (file, done) {
@@ -236,3 +237,103 @@ async function loadImageWithUrl(url) {
 }
 
 prepareDropzone();
+
+document.addEventListener("DOMContentLoaded", function () {
+  const links = document.querySelectorAll("a[data-transition]");
+  const dropZone = document.getElementById("drop_zone");
+  const cameraModal = document.getElementById("cameraModal");
+  const video = document.getElementById("camera");
+  const captureButton = document.getElementById("captureButton");
+
+  // Prevent default behavior for Dropzone
+  Dropzone.options.dropZone = {
+    autoProcessQueue: false,
+    clickable: false,
+  };
+
+  links.forEach((link) => {
+    link.addEventListener("click", function (event) {
+      event.preventDefault();
+
+      if (!document.startViewTransition) {
+        // Fallback for browsers that don't support the View Transition API
+        window.location.href = link.href;
+        return;
+      }
+
+      const url = link.href;
+
+      document.startViewTransition(() => {
+        return fetch(url)
+          .then((response) => response.text())
+          .then((html) => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, "text/html");
+            document.documentElement.replaceChild(doc.body, document.body);
+            document.documentElement.replaceChild(
+              doc.querySelector("head"),
+              document.querySelector("head")
+            );
+            history.pushState(null, "", url);
+            document.dispatchEvent(new Event("DOMContentLoaded"));
+          })
+          .catch((err) => {
+            console.warn("Failed to load page:", err);
+            window.location.href = url; // Fallback if fetch fails
+          });
+      });
+    });
+  });
+
+  dropZone.addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent the default file dialog
+
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then(function (stream) {
+          video.style.display = "block";
+          video.srcObject = stream;
+          cameraModal.style.display = "flex";
+        })
+        .catch(function (error) {
+          console.error("Error accessing the camera", error);
+        });
+    } else {
+      alert("Camera not supported");
+    }
+  });
+
+  captureButton.addEventListener("click", function () {
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const context = canvas.getContext("2d");
+    context.filter = "blur(10px)";
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    // Convert canvas to a data URL
+    const dataUrl = canvas.toDataURL("image/jpeg");
+
+    // Close the modal
+    cameraModal.style.display = "none";
+    video.srcObject.getTracks().forEach((track) => track.stop());
+
+    // Create a new Dropzone file from the data URL
+    const dropzone = Dropzone.forElement("#drop_zone");
+    const file = dataURLtoFile(dataUrl, "Camera.jpeg");
+    dropzone.addFile(file);
+  });
+
+  function dataURLtoFile(dataUrl, filename) {
+    const arr = dataUrl.split(",");
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
+  }
+});
