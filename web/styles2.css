@@ -192,14 +192,16 @@ nav.main-nav a {
 main {
     padding-bottom: 20px;
     padding-top: 20px;
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 300px;
+    padding-right: 300px;
     margin-left: 300px;
     margin-top: 56px; /* Adjust based on header height */
     flex-grow: 1;
     max-width: calc(100% - 320px);
     box-sizing: border-box;
 }
+
+
 
 h1, h2, h3 {
     color: #333;
@@ -211,6 +213,15 @@ pre {
     padding: 10px;
     border-radius: 10px;
 }
+  
+  /* Voor MacBook Pro schermen (gemiddeld rond 1280px breed) */
+  @media (max-width: 1440px) {
+    main {
+      padding-left: 100px;
+      padding-right: 100px;
+    }
+  }
+  
 
 @media (max-width: 768px) {
     aside {
@@ -383,3 +394,14 @@ pre {
     animation: slideDownText 1s forwards;
     animation-delay: 3s;
 }
+
+.h1-con {
+    display: flex;
+    align-items: center;
+}
+
+.h1-con .em {
+    font-size: 1em;
+    margin-right: 10px;
+}   
+

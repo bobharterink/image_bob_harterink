@@ -36,7 +36,7 @@
         <nav class="sidebar-nav">
             <a href="#" class="dropdown-toggle nav-header">
                 <i class="em em-wave" aria-role="presentation" aria-label="WAVING HAND SIGN"></i>
-                <span class="title-nav">Introduction</span>
+                <span class="title-nav">Introductie</span>
             </a>
             <h1 class="nav-title">Getting Started</h1>
             <div class="dropdown">
@@ -88,29 +88,38 @@
     </aside>
     
     <main>
-        <h1>Dropzone Configuration Basics</h1>
-        <p>In this section, we'll go over the fundamentals of configuring Dropzones.</p>
+        <div class="h1-con">
+            <i class="em em-wave" aria-role="presentation" aria-label="WAVING HAND SIGN"></i>
+            <h1>Introductie</h1>
+        </div>
+        <p>Op deze pagina leg ik mijn proces uit tot aan het eindresultaat, voornamelijk aan de hand van afbeeldingen, screenshots en code. Mijn doel is om je een duidelijk inzicht te geven in de stappen die ik heb genomen en de keuzes die ik heb gemaakt. Als je direct naar de code wilt gaan, kun je in het linker menu scrollen naar het hoofdstuk <a href="#">Site code</a> waar alle code te vinden is. Ik heb geprobeerd dit op dezelfde manier weer te geven als op softwaresites waar je de documentatie kunt bekijken. Hopelijk vind je de uitleg nuttig en leerzaam. Veel plezier!</p>
 
-        <h2 id="declarative">Declarative</h2>
+        <h2 id="code">Code</h2>
+        <p>De codes op de website staan zoals hier beneden vermeld in de kleur van het logo en de favicon.</p>
         <pre>
-            &lt;form action="/target" class="dropzone" id="my-great-dropzone"&gt;&lt;/form&gt;
+            &lt;!DOCTYPE html&gt;
+            &lt;html lang="nl"&gt;
+            &lt;head&gt;
+                &lt;meta charset="UTF-8"&gt;
+                &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                &lt;title&gt;Simpele HTML&lt;/title&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+                &lt;header&gt;
+                    &lt;h1&gt;Welkom&lt;/h1&gt;
+                &lt;/header&gt;
+                &lt;main&gt;
+                    &lt;p&gt;Dit is de manier waarop code weergegeven wordt op deze pagina.&lt;/p&gt;
+                &lt;/main&gt;
+                &lt;footer&gt;
+                    &lt;p&gt;&amp;copy; 2024 Mijn Pagina&lt;/p&gt;
+                &lt;/footer&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+                </pre>
 
-            &lt;script&gt;
-            Dropzone.options.myGreatDropzone = {
-                paramName: "file",
-                maxFilesize: 2,
-                accept: function(file, done) {
-                    if (file.name == "justinbieber.jpg") {
-                        done("Naha, you don't.");
-                    } else {
-                        done();
-                    }
-                }
-            };
-            &lt;/script&gt;
-        </pre>
-
-        <h2 id="imperative">Imperative</h2>
+        <h2 id="notion">Notion</h2>
+        <p>Het grootste deel van de informatie die ik hier presenteer, is ook al gedeeltelijk gedeeld op Notion. Echter, om iedereen een beter inzicht te geven, zal ik het hier in platte tekst uitleggen.</p>
         <pre>
             import Dropzone from "dropzone";
 
@@ -140,6 +149,48 @@
         </pre>
 
         <p>For a list of all possible options, refer to the options.js file.</p>
+        <p>Hoe zoek ik uit waar ik moet beginnen?
+
+            hoe werkt het
+            
+            - leeg canvas
+            - sliders moet verschillende functies.
+                - hoeveel stukken
+                    - verdubbelende trap?
+                - vorm
+                    - bol
+                    - vierkant
+                    - driehoek
+                    - piramide
+                    - rechthoek
+                - grootte
+                    - lengte
+                    - breedte
+                    - hoogte
+                - vorm?
+                    - wave
+                    - random bulten
+                    - point in
+                        - follow mouse?
+                    - point out
+                        - escape mouse?
+                    - 
+            
+            problemen om te tackelen
+            
+            - 
+            
+            eigen template gepakt van portfolio om een indruk te geven hoe het een beetje eruit moet zien.
+            
+            https://subtle-creponne-48671d.netlify.app/
+            
+            een Boek gekocht van Mathew Shillian over de papier techniek die hij gebruik bij het maken van zijn kunstwerken. Lijkt me een goed begin.
+            
+            https://www.deslegte.com/unfolding-3217979/?utm_source=googlebase&utm_medium=cpc&utm_campaign=googlebase&gclid=Cj0KCQjw1OmoBhDXARIsAAAYGSG5Buulrtx5cSR6Mvd8sMa1d8ECfmWE9I8GMlMkPd9oujMu6VMk7VUaAjryEALw_wcB
+            
+            test three.js sliders
+            
+            https://lively-horse-dd3198.netlify.app/</p>
     </main>
 </div>
 

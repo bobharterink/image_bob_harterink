@@ -2,4 +2,6 @@ node_modules/
 .DS_Store
 credentials.txt
 __pycache__
-jobs/*.svg
+server/static/jobs/*.svg
+server/axidrawer-firebase-adminsdk-eu31a-dec5ec4b12.json
+

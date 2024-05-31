@@ -40,56 +40,67 @@
                 <canvas width="800" height="595" id="mycanvas"></canvas>
                 <div class="sidebar">
                     <div id="drop_zone" class="disabled dropzone">
-                        <div class="dz-message" data-dz-message><span>Drop files here to upload <br>(Max 1920*1080)</span></div>
+                        <div class="dz-message" data-dz-message><span>Click hier om bestanden te uploaden</span></div>
                     </div>
 <!-- Modal Structure -->
 <div id="cameraModal" class="modal" style="display: none;">
     <div class="modal-content">
+        <span class="close-button" onclick="closeModal()">&times;</span>
         <video id="camera" autoplay style="width: 100%; filter: blur(10px);"></video>
-        <button id="captureButton">Capture Image</button>
+        <button id="captureButton" class="styled-button">Cheese!</button>
     </div>
 </div>
+
                     <div class="controls">
-                        <label>Density dots: <input type="range" min="10" max="100" step="1" oninput="dotDensity(this)"></label>
-                        <label>Dot size: <input type="range" min="1" max="50" step="1" oninput="changedotSize(this)"></label>
-                        <label>Dot color: 
+                        <label>Cirkel densiteit: <input type="range" min="40" max="100" step="1" value="55" oninput="dotDensity(this)"></label>
+                        <label>Cirkel kleur: 
                             <select oninput="changedotColor(this)">
-                                <option value="#ff0000">Red</option>
-                                <option value="#00ff00">Green</option>
-                                <option value="#0000ff">Blue</option>
-                                <option value="#ffff00">Yellow</option>
-                                <option value="#ff00ff">Magenta</option>
+                                <option value="" disabled selected>Kies een kleur</option>
+                                <option value="#0000ff">Blauw</option>
+                                <option value="#ff0000">Rood</option>
+                                <option value="#00ff00">Groen</option>
+                                <option value="#00ffff">Licht Blauw</option>
+                                <option value="#ffff00">Geel</option>
+                                <option value="#ff00ff">Paars</option>
                             </select>
                         </label>
-                        <label>
-                            <input type="checkbox" id="modeToggle" checked onchange="changedotColor2()">
-                            Modify Stroke (Uncheck for Fill)
-                        </label>
-                        <label>Color: 
-                            <select id="colorPicker" oninput="changedotColor2()">
-                                <option value="#ff0000">Red</option>
-                                <option value="#00ff00">Green</option>
-                                <option value="#0000ff">Blue</option>
-                                <option value="#ffff00">Yellow</option>
-                                <option value="#ff00ff">Magenta</option>
+                        <label>Cirkel grootte: <input type="range" min="5" max="30" step="0.1" value="17" oninput="changedotSize(this)"></label>
+                        
+                        <label>Cirkel kleur: 
+                            <select oninput="changedotColor2(this)">
+                                <option value="" disabled selected>Kies een kleur</option>
+                                <option value="#0000ff">Blauw</option>
+                                <option value="#ff0000">Rood</option>
+                                <option value="#00ff00">Groen</option>
+                                <option value="#00ffff">Licht Blauw</option>
+                                <option value="#ffff00">Geel</option>
+                                <option value="#ff00ff">Paars</option>
                             </select>
-                        </label>                        <label>
-                            <input type="checkbox" id="uniformScaling" checked>
-                            Uniform Scaling
                         </label>
+                        <label>Cirkel grootte: <input type="range" min="5" max="30" step="0.1" value="13" oninput="changedotSize2(this)"></label>
+                        
+                        <label>Cirkel kleur: 
+                            <select oninput="changedotColor3(this)">
+                                <option value="" disabled selected>Kies een kleur</option>
+                                <option value="#0000ff">Blauw</option>
+                                <option value="#ff0000">Rood</option>
+                                <option value="#00ff00">Groen</option>
+                                <option value="#00ffff">Licht Blauw</option>
+                                <option value="#ffff00">Geel</option>
+                                <option value="#ff00ff">Paars</option>
+                            </select>
+                        </label>
+                        <label>Cirkel grootte: <input type="range" min="5" max="30" step="0.1" value="16" oninput="changedotSize3(this)"></label>
+                        
+
                         <div id="scaleControls">
                             <label>Frame size (uniform):
-                                <input id="scaleUniform" type="range" min="0.1" max="2" step="0.01" value="1" oninput="changeframeSize(true)">
+                                <input id="scaleUniform" type="range" min="0.5" max="2" step="0.01" value="1" oninput="changeframeSize(true)">
                             </label>
                         </div>
-                        <div id="nonUniformScaleControls" style="display: none;">
-                            <label>X Scale:
-                                <input id="scaleX" type="range" min="0.1" max="2" step="0.01" value="1" oninput="changeframeSize(false)">
-                            </label>
-                            <label>Y Scale:
-                                <input id="scaleY" type="range" min="0.1" max="2" step="0.01" value="1" oninput="changeframeSize(false)">
-                            </label>
-                        </div>
+                        <!-- Add this HTML inside your body tag -->
+<div id="loadingSpinner"></div>
+
                         <button id="downloadSvg">Laten Maken!</button>
                     </div>
                 </div>
@@ -135,7 +146,10 @@
                 });
             });
         });
-        </script>
 
+        function closeModal() {
+            document.getElementById('cameraModal').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
