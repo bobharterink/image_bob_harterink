@@ -189,10 +189,15 @@ nav .site-title {
   margin-right: 60px;
 }
 
-nav a {
+nav .nav-links a {
   text-decoration: none;
   font-size: 1.1em;
   color: #000;
+  font-weight: 400;
+}
+
+.logohref {
+height: 40px;
 }
 
 #content {
@@ -219,7 +224,7 @@ nav a {
 }
 
 canvas {
-  border-style: outset;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .sidebar {
@@ -262,10 +267,11 @@ canvas {
   display: flex;
   align-items: center;
   gap: 10px;
+  font-weight: 300;
 }
 
 .controls input[type="range"] {
-  width: 100%;
+  /* width: 100%; */
 }
 
 .controls input[type="color"] {

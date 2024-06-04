@@ -25,8 +25,8 @@ document.querySelectorAll("input[type=checkbox]").forEach((checkbox) => {
 
 const options = {
   userId: "harterink",
-  projectId: "cirkel",
-  canvasId: "mycanvas",
+  projectId: "vierkant2",
+  canvasId: "mycanvas2",
   autoplay: true,
 };
 
@@ -35,10 +35,6 @@ ndbx.embed(options, function (err, player) {
 });
 
 // This function is called when the size slider is dragged.
-function dotTranslate(e) {
-  window.player.setValue("divide1", "b", e.value);
-}
-window.dotTranslate = dotTranslate;
 function dotDensity(e) {
   window.player.setValue("clamp1", "v", e.value);
 }

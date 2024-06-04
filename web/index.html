@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <link rel="icon" href="favicon.ico?v=2" type="image/x-icon">
+    <link id="favicon" rel="icon" href="favicon1.ico?v=2" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Door het oog van de maker</title>
@@ -12,7 +11,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
     <div id="loading-screen">
         <div class="outer-circle">
@@ -27,83 +25,122 @@
     <div class="cover-screen"></div>
     <div id="content" style="display: none;">
         <nav>
-            <a href="index.html">Home</a>
-            <a href="cirkel.html">Cirkel</a>
-            <a href="imagegrid.html">imagegrid</a>
+            <div class="logo-title">
+                <a class="logohref" href="/web/index.html"><img id="logo" src="" alt="Logo" class="logo"></a>
+                <span class="site-title">Door het oog van de maker</span>
+            </div>
+            <div class="nav-links">
+                <a href="docs.html" data-transition="auto">&nbsp;</a>  
+                <a href="index.html" data-transition="auto">Cirkel</a>  
+                <a href="golf.html" data-transition="auto">Golf</a>
+                <a href="vierkant.html" data-transition="auto">Vierkant</a>
+            </div>
         </nav>
+        <div class="main-wrapper">
+            <div class="main-content">
+                <canvas width="800" height="595" id="mycanvas"></canvas>
+                <div class="sidebar">
+                    <div id="drop_zone" class="disabled dropzone">
+                        <div class="dz-message" data-dz-message><span>Click hier om bestanden te uploaden</span></div>
+                    </div>
+<!-- Modal Structure -->
+<div id="cameraModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <video id="camera" autoplay style="width: 100%; filter: blur(10px);"></video>
+        <button id="captureButton" class="styled-button">Cheese!</button>
+    </div>
+</div>
 
-        <div id="drop_zone" class="disabled dropzone">
-            <span class="text-lg">Drag &amp; Drop</span>
-            <span class="text-sm">JPEG file here</span>
-            <span class="text-sm">— OR —</span>
-            <span class="fake-button">Browse Files</span>
+                    <div class="controls">
+                        <label>Cirkel densiteit: <input type="range" min="40" max="100" step="1" value="55" oninput="dotDensity(this)"></label>
+                        <label>Cirkel kleur: 
+                            <select oninput="changedotColor(this)">
+                                <option value="" disabled selected>Kies een kleur</option>
+                                <option value="#0000ff">Blauw</option>
+                                <option value="#ff0000">Rood</option>
+                                <option value="#00ff00">Groen</option>
+                                <option value="#00ffff">Licht Blauw</option>
+                                <option value="#ffff00">Geel</option>
+                                <option value="#ff00ff">Paars</option>
+                            </select>
+                        </label>
+                        <label>Cirkel grootte: <input type="range" min="5" max="30" step="0.1" value="17" oninput="changedotSize(this)"></label>
+                        
+                        <label>Cirkel kleur: 
+                            <select oninput="changedotColor2(this)">
+                                <option value="" disabled selected>Kies een kleur</option>
+                                <option value="#0000ff">Blauw</option>
+                                <option value="#ff0000">Rood</option>
+                                <option value="#00ff00">Groen</option>
+                                <option value="#00ffff">Licht Blauw</option>
+                                <option value="#ffff00">Geel</option>
+                                <option value="#ff00ff">Paars</option>
+                            </select>
+                        </label>
+                        <label>Cirkel grootte: <input type="range" min="5" max="30" step="0.1" value="13" oninput="changedotSize2(this)"></label>
+                        <label>Cirkel Verschuiving: <input type="range" min="2" max="30" step="1" value="2" oninput="changedotShift(this)"></label>
+
+                        <label>Cirkel kleur: 
+                            <select oninput="changedotColor3(this)">
+                                <option value="" disabled selected>Kies een kleur</option>
+                                <option value="#0000ff">Blauw</option>
+                                <option value="#ff0000">Rood</option>
+                                <option value="#00ff00">Groen</option>
+                                <option value="#00ffff">Licht Blauw</option>
+                                <option value="#ffff00">Geel</option>
+                                <option value="#ff00ff">Paars</option>
+                            </select>
+                        </label>
+                        <label>Cirkel grootte: <input type="range" min="5" max="30" step="0.1" value="16" oninput="changedotSize3(this)"></label>
+                        <label>Cirkel tegengesteld: <input type="checkbox" value="10000" id="myCheckbox" oninput="dotTranslate(this)" checked></label>
+
+
+                        <div id="scaleControls">
+                            <label>Frame size:
+                                <input id="scaleUniform" type="range" min="0.5" max="2" step="0.01" value="1" oninput="changeframeSize(true)">
+                            </label>
+                        </div>
+                        <!-- Add this HTML inside your body tag -->
+<div id="loadingSpinner"></div>
+
+                        <button id="downloadSvg">Laten Maken!</button>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <canvas width="800" height="600" id="mycanvas"></canvas>
+        <script src="https://unpkg.com/dropzone@6.0.0-beta.2/dist/dropzone-min.js"></script>
+        <script src="https://nodebox.live/api/v1/ndbx.js"></script>
+        <script type="module" src="cirkel.js"></script>
     </div>
     <script src="script.js"></script>
-    <script src="https://unpkg.com/dropzone@6.0.0-beta.2/dist/dropzone-min.js"></script>
-    <script src="https://nodebox.live/api/v1/ndbx.js"></script>
     <script>
-        const options = {
-            userId: 'harterink',
-            projectId: 'bla',
-            canvasId: 'mycanvas',
-            autoplay: true
-        };
+               function closeModal() {
+            document.getElementById('cameraModal').style.display = 'none';
+        
 
-        ndbx.embed(options, function (err, player) {
-            window.player = player; // Make the player object global.
-        });
+            // Stop the camera stream
+    const video = document.getElementById('camera');
+    const stream = video.srcObject;
+    const tracks = stream.getTracks();
 
-        async function prepareDropzone() {
-            const filename = Math.random().toString(36).substring(7) + '.jpeg';
-            const url = `https://dangerbuck.s3.eu-north-1.amazonaws.com/uploads/${filename}`;
+    tracks.forEach(function(track) {
+        track.stop();
+    });
 
-            let myDropzone = new Dropzone('#drop_zone', {
-                url: url,
-                method: "put",
-                binaryBody: true,
-                acceptedFiles: "image/jpeg",
-                accept: function(file, done) {
-                    const image = new Image();
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        image.onload = () => {
-                            if (image.width > 650 || image.height > 650) {
-                                done("The image is too large. Please upload an image no larger than 650x650 pixels.");
-                            } else {
-                                done();
-                            }
-                        };
-                        image.src = e.target.result;
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-
-            myDropzone.on("complete", (file) => {
-                if (file.status === Dropzone.SUCCESS) {
-                    loadImageWithUrl(url);
-                }
-            });
-        }
-
-        async function loadImageWithUrl(url) {
-            const res = await fetch(url, { mode: 'cors' });
-            const blob = await res.blob();
-            const blobUrl = URL.createObjectURL(blob);
-            const image = new Image();
-            image.onload = function () {
-                ndbx.assets[url] = image;
-                player.setValue('getPixels2', 'imageName', url);
-                URL.revokeObjectURL(blobUrl);
-            };
-            image.src = blobUrl;
-        }
-
-        prepareDropzone();
+    video.srcObject = null;
+}
     </script>
+            <script>
+                const checkbox = document.getElementById('myCheckbox');
+                
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        this.value = "10000";
+                    } else {
+                        this.value = "2";
+                    }
+                });
+            </script>
 </body>
-
 </html>

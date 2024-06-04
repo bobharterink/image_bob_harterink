@@ -26,18 +26,18 @@
     <div id="content" style="display: none;">
         <nav>
             <div class="logo-title">
-                <img id="logo" src="" alt="Logo" class="logo">
+                <a class="logohref" href="/web/index.html"><img id="logo" src="" alt="Logo" class="logo"></a>
                 <span class="site-title">Door het oog van de maker</span>
             </div>
             <div class="nav-links">
-                <a href="index.html" data-transition="auto">Golf</a>  
-                <a href="cirkel.html" data-transition="auto">Cirkel</a>
-                <a href="hoek.html" data-transition="auto">Hoek</a>
+                <a href="index.html" data-transition="auto">Cirkel</a>  
+                <a href="golf.html" data-transition="auto">Golf</a>
+                <a href="vierkant.html" data-transition="auto">Vierkant</a>
             </div>
         </nav>
         <div class="main-wrapper">
             <div class="main-content">
-                <canvas width="800" height="595" id="mycanvas"></canvas>
+                <canvas width="800" height="595" id="mycanvas2"></canvas>
                 <div class="sidebar">
                     <div id="drop_zone" class="disabled dropzone">
                         <div class="dz-message" data-dz-message><span>Click hier om bestanden te uploaden</span></div>
@@ -52,7 +52,7 @@
 </div>
 
                     <div class="controls">
-                        <label>Cirkel densiteit: <input type="range" min="40" max="100" step="1" value="55" oninput="dotDensity(this)"></label>
+                        <label>Vierkant densiteit: <input type="range" min="40" max="100" step="1" value="55" oninput="dotDensity(this)"></label>
                         <label>Cirkel kleur: 
                             <select oninput="changedotColor(this)">
                                 <option value="" disabled selected>Kies een kleur</option>
@@ -92,7 +92,7 @@
                             </select>
                         </label>
                         <label>Cirkel grootte: <input type="range" min="5" max="30" step="0.1" value="16" oninput="changedotSize3(this)"></label>
-
+                        
 
                         <div id="scaleControls">
                             <label>Frame size:
@@ -109,49 +109,13 @@
         </div>
         <script src="https://unpkg.com/dropzone@6.0.0-beta.2/dist/dropzone-min.js"></script>
         <script src="https://nodebox.live/api/v1/ndbx.js"></script>
-        <script type="module" src="cirkel.js"></script>
+        <script type="module" src="vierkant.js"></script>
     </div>
     <script src="script.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const links = document.querySelectorAll('a[data-transition]');
-        
-            links.forEach(link => {
-                link.addEventListener('click', function (event) {
-                    event.preventDefault();
-        
-                    if (!document.startViewTransition) {
-                        // Fallback for browsers that don't support the View Transition API
-                        window.location.href = link.href;
-                        return;
-                    }
-        
-                    const url = link.href;
-        
-                    document.startViewTransition(() => {
-                        return fetch(url)
-                            .then(response => response.text())
-                            .then(html => {
-                                const parser = new DOMParser();
-                                const doc = parser.parseFromString(html, 'text/html');
-                                document.documentElement.replaceChild(doc.body, document.body);
-                                document.documentElement.replaceChild(doc.querySelector('head'), document.querySelector('head'));
-                                history.pushState(null, '', url);
-                                document.dispatchEvent(new Event('DOMContentLoaded'));
-                            })
-                            .catch(err => {
-                                console.warn('Failed to load page:', err);
-                                window.location.href = url; // Fallback if fetch fails
-                            });
-                    });
-                });
-            });
-        });
-
         function closeModal() {
             document.getElementById('cameraModal').style.display = 'none';
         }
     </script>
-
 </body>
 </html>
