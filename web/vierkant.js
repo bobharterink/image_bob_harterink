@@ -92,7 +92,7 @@ document.getElementById("downloadSvg").addEventListener("click", async () => {
 
   const width = 800 / 1.5;
   const height = 595 / 1.5;
-  const result = cirkel.main();
+  const result = vierkant2.main();
 
   var svg = g._toSVG(result, {
     header: true,
@@ -117,6 +117,18 @@ document.getElementById("downloadSvg").addEventListener("click", async () => {
 
   // Serialize the modified SVG document to a string
   const modifiedSvg = new XMLSerializer().serializeToString(svgDoc);
+
+  var fileName = "test.svg";
+  var blob = new Blob([modifiedSvg], { type: "image/svg+xml;charset=utf-8" });
+  var url = window.URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  document.body.appendChild(a);
+  a.style.display = "none";
+  a.href = url;
+  a.download = fileName;
+  a.target = "_blank";
+  a.click();
+  window.URL.revokeObjectURL(url);
 
   // Upload the modified SVG
   await uploadSvg(modifiedSvg);

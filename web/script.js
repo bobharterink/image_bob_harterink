@@ -28,30 +28,35 @@ document.addEventListener("DOMContentLoaded", function () {
       src: "Door_Het_Oog1.png",
       color: "#ed1c40",
       secondaryColor: "#ffe6ea",
+      hoverColor: "#D01937",
       favicon: "favicon1.ico?v=3",
     },
     {
       src: "Door_Het_Oog2.png",
       color: "#1c88ed",
       secondaryColor: "#d9edff",
+      hoverColor: "#1872C7",
       favicon: "favicon2.ico?v=2",
     },
     {
       src: "Door_Het_Oog3.png",
       color: "#1ced6b",
       secondaryColor: "#e6ffef",
+      hoverColor: "#1BD863",
       favicon: "favicon3.ico?v=2",
     },
     {
       src: "Door_Het_Oog4.png",
       color: "#ed1cae",
       secondaryColor: "#ffe6f7",
+      hoverColor: "#BB178A",
       favicon: "favicon4.ico?v=2",
     },
     {
       src: "Door_Het_Oog5.png",
       color: "#edb71c",
       secondaryColor: "#fff8e6",
+      hoverColor: "#E1AB16",
       favicon: "favicon5.ico?v=2",
     },
   ];
@@ -67,4 +72,25 @@ document.addEventListener("DOMContentLoaded", function () {
   preElements.forEach((pre) => {
     pre.style.backgroundColor = randomLogo.secondaryColor;
   });
+
+  document.documentElement.style.setProperty(
+    "--slider-bg-color",
+    randomLogo.secondaryColor
+  );
+
+  document.documentElement.style.setProperty(
+    "--thumb-bg-color",
+    randomLogo.color
+  );
+
+  document.documentElement.style.setProperty(
+    "--hover-bg-color",
+    randomLogo.hoverColor
+  );
+
+  // Update the background color of sidebar elements
+  /*   const sidebarElements = document.querySelectorAll(".controls");
+  sidebarElements.forEach((sidebarpara) => {
+    sidebarpara.style.backgroundColor = randomLogo.secondaryColor;
+  }); */
 });

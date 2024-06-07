@@ -239,12 +239,16 @@ canvas {
   align-items: center;
   justify-content: center;
   width: 300px;
-  height: 200px;
+  height: 150px;
   border: 2px dashed #ccc;
   border-radius: 10px;
   text-align: center;
-  margin-top: 20px; /* Add some margin to ensure it's not against the navbar */
+  /* margin-top: 20px; Add some margin to ensure it's not against the navbar */
   cursor: pointer;
+}
+
+.dropzone .dz-preview {
+  min-height: unset;
 }
 
 .fake-button {
@@ -260,7 +264,7 @@ canvas {
 .controls {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 35px;
 }
 
 .controls label {
@@ -271,7 +275,7 @@ canvas {
 }
 
 .controls input[type="range"] {
-  /* width: 100%; */
+   width: 100%; 
 }
 
 .controls input[type="color"] {
@@ -280,17 +284,18 @@ canvas {
 }
 
 .controls button {
-  padding: 10px;
-  background-color: #007bff;
+  font-family: inherit; /* Erf de font-family van de ouder */
+  font-size: inherit; 
+  padding: 8px;
+  background-color: var(--thumb-bg-color);
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px;
 }
 
 .controls button:hover {
-  background-color: #0056b3;
+  background-color: var(--hover-bg-color);
 }
 
 /* Add this to your existing CSS or style.css */
@@ -371,3 +376,81 @@ canvas {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.color-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 4px;
+}
+.color-box {
+  width: 15px;
+  height: 10px;
+  border-radius: 10px;
+  margin: 1px;
+  cursor: pointer;
+}
+.color-box2 {
+  width: 15px;
+  height: 10px;
+  border-radius: 10px;
+  margin: 1px;
+  cursor: pointer;
+}
+.color-box3 {
+  width: 15px;
+  height: 10px;
+  border-radius: 10px;
+  margin: 1px;
+  cursor: pointer;
+}
+.selected {
+  border: 1px solid #FFFFFF;
+border-radius: 5px;
+animation: height15 1s forwards; /* Pas de animatie toe met een duur van 2 seconden */
+}
+
+@keyframes height15 {
+  from {
+    height: 10px;
+    margin-bottom: 5px;
+  }
+  to {
+    height: 15px;
+    margin-bottom: 0px;
+  }
+}
+
+
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 8px;
+  background: #DDD;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity .2s;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+border-radius: 10px;
+background: var(--thumb-bg-color);
+cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  accent-color: var(--thumb-bg-color);
+}
+
+.controls-spacers {
+  background-color: #f3f3f3;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.inp-pad {
+  padding-top: 4px;
+}
+

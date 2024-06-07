@@ -153,8 +153,15 @@ nav.main-nav .site-title {
 
 nav.main-nav a {
     text-decoration: none;
-    font-size: 1.2em;
+    font-size: 1.1em;
     color: #000;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-right: 60px;
 }
 
 .dropdown {
@@ -405,3 +412,11 @@ pre {
     margin-right: 10px;
 }   
 
+.break-word {
+    word-wrap: break-word; /* Oude naam, nog steeds breed ondersteund */
+    overflow-wrap: break-word; /* Nieuwere naam */
+}
+
+.logohref {
+    height: 40px;
+}

@@ -39,7 +39,7 @@
         <div class="main-wrapper">
             <div class="main-content">
                 <canvas width="800" height="595" id="mycanvas"></canvas>
-                <div class="sidebar">
+                <div class="sidebar" id="sidebarpara">
                     <div id="drop_zone" class="disabled dropzone">
                         <div class="dz-message" data-dz-message><span>Click hier om bestanden te uploaden</span></div>
                     </div>
@@ -53,54 +53,129 @@
 </div>
 
                     <div class="controls">
-                        <label>Cirkel densiteit: <input type="range" min="40" max="100" step="1" value="55" oninput="dotDensity(this)"></label>
-                        <label>Cirkel kleur: 
-                            <select oninput="changedotColor(this)">
-                                <option value="" disabled selected>Kies een kleur</option>
-                                <option value="#0000ff">Blauw</option>
-                                <option value="#ff0000">Rood</option>
-                                <option value="#00ff00">Groen</option>
-                                <option value="#00ffff">Licht Blauw</option>
-                                <option value="#ffff00">Geel</option>
-                                <option value="#ff00ff">Paars</option>
-                            </select>
-                        </label>
-                        <label>Cirkel grootte: <input type="range" min="5" max="30" step="0.1" value="17" oninput="changedotSize(this)"></label>
+                        <div class="controls-spacers">
+                        <label><input type="range" min="40" max="100" step="1" value="55" oninput="dotDensity(this)"></label>
+                    </div>
+                    <div class="controls-spacers">
+
+                    <div class="color-container">
+                        <div class="color-box" style="background-color: #FFCB09;" value="#FFCB09" onclick="changedotColor({value: this.getAttribute('value')})" title="Geel"></div>
+                        <div class="color-box" style="background-color: #F68D2C;" value="#F68D2C" onclick="changedotColor({value: this.getAttribute('value')})" title="Oranje"></div>
+                        <div class="color-box" style="background-color: #ED1C24;" value="#ED1C24" onclick="changedotColor({value: this.getAttribute('value')})" title="Karmijn"></div>
+                        <div class="color-box" style="background-color: #D1204E;" value="#D1204E" onclick="changedotColor({value: this.getAttribute('value')})" title="Donker Rood"></div>
+                        <div class="color-box" style="background-color: #F4899D;" value="#F4899D" onclick="changedotColor({value: this.getAttribute('value')})" title="Roze"></div>
+                        <div class="color-box" style="background-color: #A3238E;" value="#A3238E" onclick="changedotColor({value: this.getAttribute('value')})" title="Lila"></div>
+                        <div class="color-box selected" style="background-color: #0B4DA1;" value="#0B4DA1" onclick="changedotColor({value: this.getAttribute('value')})" title="Blauw"></div>
+                        <div class="color-box" style="background-color: #0095D5;" value="#0095D5" onclick="changedotColor({value: this.getAttribute('value')})" title="Licht Blauw"></div>
+                        <div class="color-box" style="background-color: #A1CC3A;" value="#A1CC3A" onclick="changedotColor({value: this.getAttribute('value')})" title="Licht Groen"></div>
+                        <div class="color-box" style="background-color: #00A15C;" value="#00A15C" onclick="changedotColor({value: this.getAttribute('value')})" title="Groen"></div>
+                        <div class="color-box" style="background-color: #C54B42;" value="#C54B42" onclick="changedotColor({value: this.getAttribute('value')})" title="Sanguine Rood"></div>
+                        <div class="color-box" style="background-color: #714B3A;" value="#714B3A" onclick="changedotColor({value: this.getAttribute('value')})" title="Bruin"></div>
+                        <div class="color-box" style="background-color: #ACC0D3;" value="#ACC0D3" onclick="changedotColor({value: this.getAttribute('value')})" title="Light Koud Grijs"></div>
+                        <div class="color-box" style="background-color: #5F6D7F;" value="#5F6D7F" onclick="changedotColor({value: this.getAttribute('value')})" title="Donker Grijs"></div>
+                        <div class="color-box" style="background-color: #001722;" value="#001722" onclick="changedotColor({value: this.getAttribute('value')})" title="Zwart"></div>
+                        </div>
+                        <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            let activeDiv = document.querySelector('.color-box.selected');
+
+            document.querySelectorAll('.color-box').forEach(div => {
+                div.addEventListener('click', () => {
+                    if (activeDiv) {
+                        activeDiv.classList.remove('selected');
+                    }
+                    div.classList.add('selected');
+                    activeDiv = div;
+                });
+            });
+        });
+    </script>
+                        <label><input type="range" min="5" max="30" step="0.1" value="17" oninput="changedotSize(this)"></label>
+                    </div>
+                    <div class="controls-spacers">
+
+                        <div class="color-container">
+                            <div class="color-box2" style="background-color: #FFCB09;" value="#FFCB09" onclick="changedotColor2({value: this.getAttribute('value')})" title="Geel"></div>
+                            <div class="color-box2" style="background-color: #F68D2C;" value="#F68D2C" onclick="changedotColor2({value: this.getAttribute('value')})" title="Oranje"></div>
+                            <div class="color-box2" style="background-color: #ED1C24;" value="#ED1C24" onclick="changedotColor2({value: this.getAttribute('value')})" title="Karmijn"></div>
+                            <div class="color-box2" style="background-color: #D1204E;" value="#D1204E" onclick="changedotColor2({value: this.getAttribute('value')})" title="Donker Rood"></div>
+                            <div class="color-box2" style="background-color: #F4899D;" value="#F4899D" onclick="changedotColor2({value: this.getAttribute('value')})" title="Roze"></div>
+                            <div class="color-box2 selected" style="background-color: #A3238E;" value="#A3238E" onclick="changedotColor2({value: this.getAttribute('value')})" title="Lila"></div>
+                            <div class="color-box2" style="background-color: #0B4DA1;" value="#0B4DA1" onclick="changedotColor2({value: this.getAttribute('value')})" title="Blauw"></div>
+                            <div class="color-box2" style="background-color: #0095D5;" value="#0095D5" onclick="changedotColor2({value: this.getAttribute('value')})" title="Licht Blauw"></div>
+                            <div class="color-box2" style="background-color: #A1CC3A;" value="#A1CC3A" onclick="changedotColor2({value: this.getAttribute('value')})" title="Licht Groen"></div>
+                            <div class="color-box2" style="background-color: #00A15C;" value="#00A15C" onclick="changedotColor2({value: this.getAttribute('value')})" title="Groen"></div>
+                            <div class="color-box2" style="background-color: #C54B42;" value="#C54B42" onclick="changedotColor2({value: this.getAttribute('value')})" title="Sanguine Rood"></div>
+                            <div class="color-box2" style="background-color: #714B3A;" value="#714B3A" onclick="changedotColor2({value: this.getAttribute('value')})" title="Bruin"></div>
+                            <div class="color-box2" style="background-color: #ACC0D3;" value="#ACC0D3" onclick="changedotColor2({value: this.getAttribute('value')})" title="Light Koud Grijs"></div>
+                            <div class="color-box2" style="background-color: #5F6D7F;" value="#5F6D7F" onclick="changedotColor2({value: this.getAttribute('value')})" title="Donker Grijs"></div>
+                            <div class="color-box2" style="background-color: #001722;" value="#001722" onclick="changedotColor2({value: this.getAttribute('value')})" title="Zwart"></div>
+                        </div>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', (event) => {
+                                let activeDiv = document.querySelector('.color-box2.selected');
+                    
+                                document.querySelectorAll('.color-box2').forEach(div => {
+                                    div.addEventListener('click', () => {
+                                        if (activeDiv) {
+                                            activeDiv.classList.remove('selected');
+                                        }
+                                        div.classList.add('selected');
+                                        activeDiv = div;
+                                    });
+                                });
+                            });
+                        </script>
+                        <label><input type="range" min="5" max="30" step="0.1" value="13" oninput="changedotSize2(this)"></label>
                         
-                        <label>Cirkel kleur: 
-                            <select oninput="changedotColor2(this)">
-                                <option value="" disabled selected>Kies een kleur</option>
-                                <option value="#0000ff">Blauw</option>
-                                <option value="#ff0000">Rood</option>
-                                <option value="#00ff00">Groen</option>
-                                <option value="#00ffff">Licht Blauw</option>
-                                <option value="#ffff00">Geel</option>
-                                <option value="#ff00ff">Paars</option>
-                            </select>
-                        </label>
-                        <label>Cirkel grootte: <input type="range" min="5" max="30" step="0.1" value="13" oninput="changedotSize2(this)"></label>
-                        <label>Cirkel Verschuiving: <input type="range" min="2" max="30" step="1" value="2" oninput="changedotShift(this)"></label>
+                        <label class="inp-pad"><input type="range" min="2" max="30" step="1" value="2" oninput="changedotShift(this)"></label>
+                    </div>
+                    <div class="controls-spacers">
 
-                        <label>Cirkel kleur: 
-                            <select oninput="changedotColor3(this)">
-                                <option value="" disabled selected>Kies een kleur</option>
-                                <option value="#0000ff">Blauw</option>
-                                <option value="#ff0000">Rood</option>
-                                <option value="#00ff00">Groen</option>
-                                <option value="#00ffff">Licht Blauw</option>
-                                <option value="#ffff00">Geel</option>
-                                <option value="#ff00ff">Paars</option>
-                            </select>
-                        </label>
-                        <label>Cirkel grootte: <input type="range" min="5" max="30" step="0.1" value="16" oninput="changedotSize3(this)"></label>
-                        <label>Cirkel tegengesteld: <input type="checkbox" value="10000" id="myCheckbox" oninput="dotTranslate(this)" checked></label>
+                        <div class="color-container">
+                            <div class="color-box3" style="background-color: #FFCB09;" value="#FFCB09" onclick="changedotColor3({value: this.getAttribute('value')})" title="Geel"></div>
+                            <div class="color-box3" style="background-color: #F68D2C;" value="#F68D2C" onclick="changedotColor3({value: this.getAttribute('value')})" title="Oranje"></div>
+                            <div class="color-box3" style="background-color: #ED1C24;" value="#ED1C24" onclick="changedotColor3({value: this.getAttribute('value')})" title="Karmijn"></div>
+                            <div class="color-box3" style="background-color: #D1204E;" value="#D1204E" onclick="changedotColor3({value: this.getAttribute('value')})" title="Donker Rood"></div>
+                            <div class="color-box3" style="background-color: #F4899D;" value="#F4899D" onclick="changedotColor3({value: this.getAttribute('value')})" title="Roze"></div>
+                            <div class="color-box3" style="background-color: #A3238E;" value="#A3238E" onclick="changedotColor3({value: this.getAttribute('value')})" title="Lila"></div>
+                            <div class="color-box3" style="background-color: #0B4DA1;" value="#0B4DA1" onclick="changedotColor3({value: this.getAttribute('value')})" title="Blauw"></div>
+                            <div class="color-box3 selected" style="background-color: #0095D5;" value="#0095D5" onclick="changedotColor3({value: this.getAttribute('value')})" title="Licht Blauw"></div>
+                            <div class="color-box3" style="background-color: #A1CC3A;" value="#A1CC3A" onclick="changedotColor3({value: this.getAttribute('value')})" title="Licht Groen"></div>
+                            <div class="color-box3" style="background-color: #00A15C;" value="#00A15C" onclick="changedotColor3({value: this.getAttribute('value')})" title="Groen"></div>
+                            <div class="color-box3" style="background-color: #C54B42;" value="#C54B42" onclick="changedotColor3({value: this.getAttribute('value')})" title="Sanguine Rood"></div>
+                            <div class="color-box3" style="background-color: #714B3A;" value="#714B3A" onclick="changedotColor3({value: this.getAttribute('value')})" title="Bruin"></div>
+                            <div class="color-box3" style="background-color: #ACC0D3;" value="#ACC0D3" onclick="changedotColor3({value: this.getAttribute('value')})" title="Light Koud Grijs"></div>
+                            <div class="color-box3" style="background-color: #5F6D7F;" value="#5F6D7F" onclick="changedotColor3({value: this.getAttribute('value')})" title="Donker Grijs"></div>
+                            <div class="color-box3" style="background-color: #001722;" value="#001722" onclick="changedotColor3({value: this.getAttribute('value')})" title="Zwart"></div>
+                        </div>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', (event) => {
+                                let activeDiv = document.querySelector('.color-box3.selected');
+                    
+                                document.querySelectorAll('.color-box3').forEach(div => {
+                                    div.addEventListener('click', () => {
+                                        if (activeDiv) {
+                                            activeDiv.classList.remove('selected');
+                                        }
+                                        div.classList.add('selected');
+                                        activeDiv = div;
+                                    });
+                                });
+                            });
+                        </script>
+                        <label><input type="range" min="5" max="30" step="0.1" value="16" oninput="changedotSize3(this)"></label>
+                        <label><input type="checkbox" value="10000" id="myCheckbox" oninput="dotTranslate(this)" checked></label>
+                    </div>
 
+                        <div class="controls-spacers">
 
                         <div id="scaleControls">
-                            <label>Frame size:
-                                <input id="scaleUniform" type="range" min="0.5" max="2" step="0.01" value="1" oninput="changeframeSize(true)">
+                            <label><input id="scaleUniform" type="range" min="0.5" max="2" step="0.01" value="1" oninput="changeframeSize(true)">
                             </label>
                         </div>
+                    </div>
+
                         <!-- Add this HTML inside your body tag -->
 <div id="loadingSpinner"></div>
 
