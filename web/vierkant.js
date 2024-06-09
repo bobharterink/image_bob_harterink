@@ -40,19 +40,19 @@ function dotDensity(e) {
 }
 window.dotDensity = dotDensity;
 function changedotSize(e) {
-  window.player.setValue("getintensity5", "divider", e.value);
+  window.player.setValue("getintensity1", "divider", e.value);
 }
 window.changedotShift = changedotShift;
 function changedotShift(e) {
-  window.player.setValue("shift2", "amount", e.value);
+  window.player.setValue("shift1", "amount", e.value);
 }
 window.changedotSize = changedotSize;
 function changedotSize2(e) {
-  window.player.setValue("getintensity6", "divider", e.value);
+  window.player.setValue("getintensity2", "divider", e.value);
 }
 window.changedotSize2 = changedotSize2;
 function changedotSize3(e) {
-  window.player.setValue("getintensity1", "divider", e.value);
+  window.player.setValue("getintensity3", "divider", e.value);
 }
 window.changedotSize3 = changedotSize3;
 function changedotColor(e) {
@@ -60,11 +60,11 @@ function changedotColor(e) {
 }
 window.changedotColor = changedotColor;
 function changedotColor2(e) {
-  window.player.setValue("colorize6", "stroke", e.value);
+  window.player.setValue("colorize2", "stroke", e.value);
 }
 window.changedotColor2 = changedotColor2;
 function changedotColor3(e) {
-  window.player.setValue("colorize2", "stroke", e.value);
+  window.player.setValue("colorize3", "stroke", e.value);
 }
 window.changedotColor3 = changedotColor3;
 
@@ -118,7 +118,7 @@ document.getElementById("downloadSvg").addEventListener("click", async () => {
   // Serialize the modified SVG document to a string
   const modifiedSvg = new XMLSerializer().serializeToString(svgDoc);
 
-  var fileName = "test.svg";
+  /*   var fileName = "test.svg";
   var blob = new Blob([modifiedSvg], { type: "image/svg+xml;charset=utf-8" });
   var url = window.URL.createObjectURL(blob);
   var a = document.createElement("a");
@@ -128,7 +128,7 @@ document.getElementById("downloadSvg").addEventListener("click", async () => {
   a.download = fileName;
   a.target = "_blank";
   a.click();
-  window.URL.revokeObjectURL(url);
+  window.URL.revokeObjectURL(url); */
 
   // Upload the modified SVG
   await uploadSvg(modifiedSvg);
@@ -227,7 +227,7 @@ async function loadImageWithUrl(url) {
   const image = new Image();
   image.onload = function () {
     ndbx.assets[url] = image;
-    player.setValue("cirkelcode1", "imageName", url);
+    player.setValue("vierkantcode1", "imageName", url);
     URL.revokeObjectURL(blobUrl);
   };
   image.src = blobUrl;
