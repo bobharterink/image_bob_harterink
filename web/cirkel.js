@@ -46,11 +46,11 @@ window.dotDensity = dotDensity;
 function changedotSize(e) {
   window.player.setValue("getintensity5", "divider", e.value);
 }
-window.changedotShift = changedotShift;
+window.changedotSize = changedotSize;
 function changedotShift(e) {
   window.player.setValue("shift2", "amount", e.value);
 }
-window.changedotSize = changedotSize;
+window.changedotShift = changedotShift;
 function changedotSize2(e) {
   window.player.setValue("getintensity6", "divider", e.value);
 }
@@ -72,7 +72,7 @@ function changedotColor3(e) {
 }
 window.changedotColor3 = changedotColor3;
 
-function changeframeSize(isUniform) {
+/* function changeframeSize(isUniform) {
   if (isUniform) {
     const slider = document.getElementById("scaleUniform");
     const scaleValue = parseFloat(slider.value);
@@ -88,7 +88,7 @@ function changeframeSize(isUniform) {
   // console.log(`Scale (${axis || 'uniform'}): ${scaleValue}`);
 }
 window.changeframeSize = changeframeSize;
-
+ */
 document.getElementById("downloadSvg").addEventListener("click", async () => {
   // Show the loading spinner
   const loadingSpinner = document.getElementById("loadingSpinner");

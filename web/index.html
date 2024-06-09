@@ -54,7 +54,7 @@
 
                     <div class="controls">
                         <div class="controls-spacers">
-                        <label><input type="range" min="40" max="100" step="1" value="55" oninput="dotDensity(this)"></label>
+                        <label><input class="wideknob" type="range" min="40" max="100" step="1" value="55" oninput="dotDensity(this)"></label>
                     </div>
                     <div class="controls-spacers">
 
@@ -76,22 +76,29 @@
                         <div class="color-box" style="background-color: #001722;" value="#001722" onclick="changedotColor({value: this.getAttribute('value')})" title="Zwart"></div>
                         </div>
                         <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            let activeDiv = document.querySelector('.color-box.selected');
+document.addEventListener('DOMContentLoaded', (event) => {
+    let activeDiv = document.querySelector('.color-box.selected');
 
-            document.querySelectorAll('.color-box').forEach(div => {
-                div.addEventListener('click', () => {
-                    if (activeDiv) {
-                        activeDiv.classList.remove('selected');
-                    }
-                    div.classList.add('selected');
-                    activeDiv = div;
-                });
-            });
+    document.querySelectorAll('.color-box').forEach(div => {
+        div.addEventListener('click', () => {
+            if (activeDiv) {
+                activeDiv.classList.remove('selected');
+            }
+            div.classList.add('selected');
+            activeDiv = div;
+
+            // Get the background color of the selected color box
+            const color = div.style.backgroundColor;
+
+            // Set the stroke color of circle1 in the SVG
+            document.getElementById('circle1').setAttribute('stroke', color);
         });
+    });
+});
+
     </script>
-                        <label><input type="range" min="5" max="30" step="0.1" value="17" oninput="changedotSize(this)"></label>
-                    </div>
+                        <label class="padknob"><input class="sizeknob" type="range" min="5" max="30" step="0.1" value="17" oninput="changedotSize(this)"></label>
+                          </div>
                     <div class="controls-spacers">
 
                         <div class="color-container">
@@ -126,9 +133,12 @@
                                 });
                             });
                         </script>
-                        <label><input type="range" min="5" max="30" step="0.1" value="13" oninput="changedotSize2(this)"></label>
+                        <label class="padknob"><input class="sizeknob2"  type="range" min="5" max="30" step="0.1" value="13" oninput="changedotSize2(this)"></label>
                         
-                        <label class="inp-pad"><input type="range" min="2" max="30" step="1" value="2" oninput="changedotShift(this)"></label>
+                        <label class="inp-pad"><input id="randomThumbSize" class="rndmsizeknob" type="range" min="2" max="30" step="1" value="2" oninput="changedotShift(this)"></label>
+                    <script>
+                        
+                    </script>
                     </div>
                     <div class="controls-spacers">
 
@@ -160,19 +170,105 @@
                                         }
                                         div.classList.add('selected');
                                         activeDiv = div;
+
+                                        // Get the background color of the selected color box
+                                        const color = div.style.backgroundColor;
+
+                                        // Set the stroke color of circle2 in the SVG
+                                        document.getElementById('circle2').setAttribute('stroke', color);
                                     });
                                 });
                             });
                         </script>
-                        <label><input type="range" min="5" max="30" step="0.1" value="16" oninput="changedotSize3(this)"></label>
-                        <label><input type="checkbox" value="10000" id="myCheckbox" oninput="dotTranslate(this)" checked></label>
+                        <label class="padknob"><input class="sizeknob3" type="range" min="5" max="30" step="0.1" value="16" oninput="changedotSize3(this)"></label>
+<!-- Hidden checkbox to toggle SVGs -->
+<input type="checkbox" id="myCheckbox">
+
+<!-- Container for SVG -->
+<div id="svgContainer">
+    <svg id="svg1" xmlns="http://www.w3.org/2000/svg" viewBox="3.437 4.719 99.801 94.112">
+        <circle id="circle1" cx="33.514" cy="34.796" r="13.2" fill="none" stroke="rgb(11, 77, 161)" stroke-miterlimit="10" stroke-width="4"></circle>
+        <circle id="circle2" cx="73.161" cy="68.754" r="14.9" fill="none" stroke="rgb(0, 149, 213)" stroke-miterlimit="10" stroke-width="4"></circle>
+    </svg>
+    
+</div>
+
+
                     </div>
 
                         <div class="controls-spacers">
 
                         <div id="scaleControls">
-                            <label><input id="scaleUniform" type="range" min="0.5" max="2" step="0.01" value="1" oninput="changeframeSize(true)">
+                            <label>      <input id="scaleUniform" class="scaleSlider" type="range" min="0.5" max="2" step="0.01" value="1" oninput="changeFrameSize(this)">
                             </label>
+                            <script>
+                           // Function to initialize the player and set it globally
+function initializePlayer() {
+  const options = {
+    userId: "harterink",
+    projectId: "cirkel",
+    canvasId: "mycanvas",
+    autoplay: true,
+  };
+
+  ndbx.embed(options, function (err, player) {
+    if (err) {
+      console.error("Error embedding player:", err);
+    } else {
+      window.player = player; // Make the player object global.
+      initializeSlider(); // Initialize slider after player is ready
+    }
+  });
+}
+
+// Function to initialize the slider and its events
+function initializeSlider() {
+  var rangeInput = document.getElementById('scaleUniform');
+  rangeInput.addEventListener('input', function() {
+    changeFrameSize(rangeInput);
+  });
+  changeFrameSize(rangeInput); // Initialize the width of the slider
+}
+
+// Function to change the frame size
+function changeFrameSize(rangeInput) {
+  var minWidth = 50;  // Minimum width of the slider in percentages
+  var maxWidth = 100; // Maximum width of the slider in percentages
+  var value = rangeInput.value;
+
+  // Calculate the new width in percentages
+  var newWidth = minWidth + ((value - rangeInput.min) / (rangeInput.max - rangeInput.min) * (maxWidth - minWidth));
+
+  // Apply the new width to the slider
+  rangeInput.style.width = newWidth + '%';
+
+  // Update the scale
+  changeframeSize(true);
+}
+
+// Function to change the frame size in the player
+function changeframeSize(isUniform) {
+  if (isUniform) {
+    const slider = document.getElementById("scaleUniform");
+    const scaleValue = parseFloat(slider.value);
+
+    if (window.player && typeof window.player.setValue === 'function') {
+      window.player.setValue("scale1", "scale", { x: scaleValue, y: scaleValue });
+    } else {
+      console.error("window.player is not defined or does not have a setValue method.");
+    }
+  }
+}
+
+// Initialize the player when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+  initializePlayer();
+});
+
+window.changeframeSize = changeframeSize;
+
+                              </script>
+                              
                         </div>
                     </div>
 
@@ -206,7 +302,7 @@
     video.srcObject = null;
 }
     </script>
-            <script>
+    <script>
                 const checkbox = document.getElementById('myCheckbox');
                 
                 checkbox.addEventListener('change', function() {
@@ -216,6 +312,233 @@
                         this.value = "2";
                     }
                 });
-            </script>
+    </script>
+    <script>
+                                        document.querySelector('input.sizeknob').addEventListener('input', function(event) {
+                                          var rangeInput = event.target;
+                                          var maxSize = 30; // Maximum grootte van de knop
+                                          var minSize = 5;  // Minimum grootte van de knop
+                                          var value = rangeInput.value;
+                                      
+                                      
+                                          // Bereken de nieuwe grootte
+                                          var newSize = maxSize - ((value - rangeInput.min) / (rangeInput.max - rangeInput.min) * (maxSize - minSize));
+                                      
+                                          // Pas de nieuwe grootte toe op de schuifregelaar knop
+                                          rangeInput.style.setProperty('--thumb-size', newSize + 'px');
+
+                                              // Update the r attribute of circle1
+                                        document.getElementById('circle1').setAttribute('r', newSize/1.3);
+                                          console.log(newSize);
+                                      
+                                          // Log de nieuwe grootte naar de console
+                                        });
+                                      
+                                        // Initialiseer de grootte van de knop bij het laden van de pagina
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                          var rangeInput = document.querySelector('input.sizeknob');
+                                          var maxSize = 30; // Maximum grootte van de knop
+                                          var minSize = 5;  // Minimum grootte van de knop
+                                          var value = rangeInput.value;
+                                      
+                                      
+                                          // Bereken de nieuwe grootte
+                                          var newSize = maxSize - ((value - rangeInput.min) / (rangeInput.max - rangeInput.min) * (maxSize - minSize));
+                                      
+                                          // Pas de nieuwe grootte toe op de schuifregelaar knop
+                                          rangeInput.style.setProperty('--thumb-size', newSize + 'px');
+                                      
+                                          // Log de nieuwe grootte naar de console
+                                        });
+    </script>
+    <script>
+                                                                            document.querySelector('input.sizeknob2').addEventListener('input', function(event) {
+                                                                              var rangeInput = event.target;
+                                                                              var maxSize = 30; // Maximum grootte van de knop
+                                                                              var minSize = 5;  // Minimum grootte van de knop
+                                                                              var value = rangeInput.value;
+                                                                          
+                                                                          
+                                                                              // Bereken de nieuwe grootte
+                                                                              var newSize = maxSize - ((value - rangeInput.min) / (rangeInput.max - rangeInput.min) * (maxSize - minSize));
+                                                                          
+                                                                              // Pas de nieuwe grootte toe op de schuifregelaar knop
+                                                                              rangeInput.style.setProperty('--thumb-size', newSize + 'px');
+                                                                          
+                                                                              // Log de nieuwe grootte naar de console
+                                                                            });
+                                                                          
+                                                                            // Initialiseer de grootte van de knop bij het laden van de pagina
+                                                                            document.addEventListener('DOMContentLoaded', function() {
+                                                                              var rangeInput = document.querySelector('input.sizeknob2');
+                                                                              var maxSize = 30; // Maximum grootte van de knop
+                                                                              var minSize = 5;  // Minimum grootte van de knop
+                                                                              var value = rangeInput.value;
+                                                                          
+                                                                          
+                                                                              // Bereken de nieuwe grootte
+                                                                              var newSize = maxSize - ((value - rangeInput.min) / (rangeInput.max - rangeInput.min) * (maxSize - minSize));
+                                                                          
+                                                                              // Pas de nieuwe grootte toe op de schuifregelaar knop
+                                                                              rangeInput.style.setProperty('--thumb-size', newSize + 'px');
+                                                                          
+                                                                              // Log de nieuwe grootte naar de console
+                                                                            });
+    </script>
+    <script>
+document.querySelector('input.sizeknob3').addEventListener('input', function(event) {
+var rangeInput = event.target;
+var maxSize = 30; // Maximum grootte van de knop
+var minSize = 5;  // Minimum grootte van de knop
+var value = rangeInput.value;
+
+
+// Bereken de nieuwe grootte
+var newSize = maxSize - ((value - rangeInput.min) / (rangeInput.max - rangeInput.min) * (maxSize - minSize));
+
+// Pas de nieuwe grootte toe op de schuifregelaar knop
+rangeInput.style.setProperty('--thumb-size', newSize + 'px');
+document.getElementById('circle2').setAttribute('r', newSize/1.3);
+
+});
+
+// Initialiseer de grootte van de knop bij het laden van de pagina
+document.addEventListener('DOMContentLoaded', function() {
+var rangeInput = document.querySelector('input.sizeknob3');
+var maxSize = 30; // Maximum grootte van de knop
+var minSize = 5;  // Minimum grootte van de knop
+var value = rangeInput.value;
+
+
+// Bereken de nieuwe grootte
+var newSize = maxSize - ((value - rangeInput.min) / (rangeInput.max - rangeInput.min) * (maxSize - minSize));
+
+// Pas de nieuwe grootte toe op de schuifregelaar knop
+rangeInput.style.setProperty('--thumb-size', newSize + 'px');
+
+});
+    </script>
+        <script>
+document.querySelector('input.rndmsizeknob').addEventListener('input', function(event) {
+    var rangeInput = event.target;
+    var maxSize = 30; // Maximum grootte van de knop
+    var minSize = 5;  // Minimum grootte van de knop
+
+    // Genereer een willekeurige grootte tussen minSize en maxSize
+    var newSize = Math.random() * (maxSize - minSize) + minSize;
+
+    // Pas de nieuwe grootte toe op de schuifregelaar knop
+    rangeInput.style.setProperty('--thumb-size', newSize + 'px');
+});
+
+// Initialiseer de grootte van de knop bij het laden van de pagina
+document.addEventListener('DOMContentLoaded', function() {
+    var rangeInput = document.querySelector('input.rndmsizeknob');
+    var maxSize = 30; // Maximum grootte van de knop
+    var minSize = 5;  // Minimum grootte van de knop
+
+    // Genereer een willekeurige grootte tussen minSize en maxSize
+    var newSize = Math.random() * (maxSize - minSize) + minSize;
+
+    // Pas de nieuwe grootte toe op de schuifregelaar knop
+    rangeInput.style.setProperty('--thumb-size', newSize + 'px');
+});
+    </script>
+    <script>
+        document.querySelector('input.wideknob').addEventListener('input', function(event) {
+var rangeInput = event.target;
+var maxSize = 50; // Maximum grootte van de knop
+var minSize = 5;  // Minimum grootte van de knop
+var value = rangeInput.value;
+
+
+// Bereken de nieuwe grootte
+var newSize = maxSize - ((value - rangeInput.min) / (rangeInput.max - rangeInput.min) * (maxSize - minSize));
+
+// Pas de nieuwe grootte toe op de schuifregelaar knop
+rangeInput.style.setProperty('--width-size', newSize + 'px');
+
+// Log de nieuwe grootte naar de console
+});
+
+// Initialiseer de grootte van de knop bij het laden van de pagina
+document.addEventListener('DOMContentLoaded', function() {
+var rangeInput = document.querySelector('input.wideknob');
+var maxSize = 50; // Maximum grootte van de knop
+var minSize = 5;  // Minimum grootte van de knop
+var value = rangeInput.value;
+
+
+// Bereken de nieuwe grootte
+var newSize = maxSize - ((value - rangeInput.min) / (rangeInput.max - rangeInput.min) * (maxSize - minSize));
+
+// Pas de nieuwe grootte toe op de schuifregelaar knop
+rangeInput.style.setProperty('--width-size', newSize + 'px');
+
+});
+    </script>
+<script>
+    const options = {
+        userId: "harterink",
+        projectId: "cirkel",
+        canvasId: "mycanvas",
+        autoplay: true,
+    };
+
+    ndbx.embed(options, function (err, player) {
+        window.player = player; // Make the player object global.
+    });
+
+    function dotTranslate(e) {
+        window.player.setValue("divide1", "b", e.value);
+    }
+    window.dotTranslate = dotTranslate;
+
+    document.getElementById('svgContainer').addEventListener('click', function() {
+        const checkbox = document.getElementById('myCheckbox');
+        checkbox.checked = !checkbox.checked; // Toggle checkbox state
+        checkbox.dispatchEvent(new Event('change')); // Trigger change event
+        dotTranslate(checkbox); // Call dotTranslate function
+    });
+
+    document.getElementById('myCheckbox').addEventListener('change', function() {
+        const circle1 = document.getElementById('circle1');
+        const circle2 = document.getElementById('circle2');
+
+        if (this.checked) {
+            animateCircle(circle1, 47.496, 46.023);
+            animateCircle(circle2, 47.496, 46.023);
+        } else {
+            animateCircle(circle1, 33.514, 34.796);
+            animateCircle(circle2, 73.161, 68.754);
+        }
+    });
+
+    function animateCircle(circle, targetCx, targetCy) {
+        const duration = 1000; // Duration in ms
+        const startCx = parseFloat(circle.getAttribute('cx'));
+        const startCy = parseFloat(circle.getAttribute('cy'));
+        const deltaCx = targetCx - startCx;
+        const deltaCy = targetCy - startCy;
+        const startTime = performance.now();
+
+        function animate(time) {
+            const elapsed = time - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            circle.setAttribute('cx', startCx + deltaCx * progress);
+            circle.setAttribute('cy', startCy + deltaCy * progress);
+
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            }
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    // Automatically trigger the change event to handle initial state
+    document.getElementById('myCheckbox').dispatchEvent(new Event('change'));
+</script>
 </body>
 </html>

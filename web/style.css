@@ -264,19 +264,35 @@ canvas {
 .controls {
   display: flex;
   flex-direction: column;
-  gap: 35px;
 }
+
+.controls .controls-spacers {
+  margin-bottom: 30px;
+}
+
+.controls .controls-spacers:nth-child(5) {
+  margin-bottom: 20px;
+}
+
+
+
+
 
 .controls label {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 10px;
   font-weight: 300;
 }
-
 .controls input[type="range"] {
-   width: 100%; 
+  width: 100%; 
 }
+
+input.scaleSlider[type="range"] {
+  transition: width 0.2s; /* Smooth transition */
+}
+
 
 .controls input[type="color"] {
   width: 50px;
@@ -327,20 +343,29 @@ canvas {
 }
 
 #captureButton {
+  font-family: inherit; /* Erf de font-family van de ouder */
+  font-size: inherit; 
   position: absolute;
-  bottom: 20px; /* Verplaats de knop naar de onderkant van de modal */
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-
-.styled-button {
-  padding: 10px;
-  background-color: #007bff;
+  background-color: var(--thumb-bg-color);
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  bottom: 15px; /* Verplaats de knop naar de onderkant van de modal */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#captureButton:hover {
+background-color: var(--hover-bg-color);
+}
+
+
+.styled-button {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 15px;
+  padding-right: 15px;
   margin-top: 10px;
 }
 
@@ -406,9 +431,10 @@ canvas {
 .selected {
   border: 1px solid #FFFFFF;
 border-radius: 5px;
-animation: height15 1s forwards; /* Pas de animatie toe met een duur van 2 seconden */
+height: 15px;
+/* animation: height15 1s forwards; Pas de animatie toe met een duur van 2 seconden */
 }
-
+/* 
 @keyframes height15 {
   from {
     height: 10px;
@@ -418,7 +444,7 @@ animation: height15 1s forwards; /* Pas de animatie toe met een duur van 2 secon
     height: 15px;
     margin-bottom: 0px;
   }
-}
+} */
 
 
 input[type="range"] {
@@ -430,18 +456,127 @@ input[type="range"] {
   transition: opacity .2s;
 }
 
-input[type="range"]::-webkit-slider-thumb {
+input.sizeknob[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: var(--thumb-size, 15px);
+  height: var(--thumb-size, 15px);
+  border-radius: 20px;
+  background: var(--thumb-bg-color, #007bff);
+  cursor: pointer;
+  transition: width 0.2s, height 0.2s;
+}
+
+input.sizeknob[type="range"]::-moz-range-thumb {
+  width: var(--thumb-size, 15px);
+  height: var(--thumb-size, 15px);
+  border-radius: 10px;
+  background: var(--thumb-bg-color, #007bff);
+  cursor: pointer;
+  transition: width 0.2s, height 0.2s;
+}
+
+input.sizeknob2[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: var(--thumb-size, 15px);
+  height: var(--thumb-size, 15px);
+  border-radius: 20px;
+  background: var(--thumb-bg-color, #007bff);
+  cursor: pointer;
+  transition: width 0.2s, height 0.2s;
+}
+
+input.sizeknob2[type="range"]::-moz-range-thumb {
+  width: var(--thumb-size, 15px);
+  height: var(--thumb-size, 15px);
+  border-radius: 10px;
+  background: var(--thumb-bg-color, #007bff);
+  cursor: pointer;
+  transition: width 0.2s, height 0.2s;
+}
+
+input.rndmsizeknob[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: var(--thumb-size, 15px);
+  height: var(--thumb-size, 15px);
+  border-radius: 20px;
+  background: var(--thumb-bg-color, #007bff);
+  cursor: pointer;
+  transition: width 0.2s, height 0.2s;
+}
+
+input.rndmsizeknob[type="range"]::-moz-range-thumb {
+  width: var(--thumb-size, 15px);
+  height: var(--thumb-size, 15px);
+  border-radius: 10px;
+  background: var(--thumb-bg-color, #007bff);
+  cursor: pointer;
+  transition: width 0.2s, height 0.2s;
+}
+
+
+
+input.sizeknob3[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: var(--thumb-size, 15px);
+  height: var(--thumb-size, 15px);
+  border-radius: 20px;
+  background: var(--thumb-bg-color, #007bff);
+  cursor: pointer;
+  transition: width 0.2s, height 0.2s;
+}
+
+input.sizeknob3[type="range"]::-moz-range-thumb {
+  width: var(--thumb-size, 15px);
+  height: var(--thumb-size, 15px);
+  border-radius: 10px;
+  background: var(--thumb-bg-color, #007bff);
+  cursor: pointer;
+  transition: width 0.2s, height 0.2s;
+}
+
+input.wideknob[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: var(--width-size, 15px);
+  height: 15px;
+  border-radius: 10px;
+  background: var(--thumb-bg-color, #007bff);
+  cursor: pointer;
+  transition: width 0.2s, height 0.2s;
+}
+
+input.wideknob[type="range"]::-moz-range-thumb {
+  width: var(--thumb-width, 15px);
+  height: 15px;
+  border-radius: 10px;
+  background: var(--thumb-bg-color, #007bff);
+  cursor: pointer;
+  transition: width 0.2s, height 0.2s;
+}
+
+input.scaleSlider[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 15px;
   height: 15px;
-border-radius: 10px;
-background: var(--thumb-bg-color);
-cursor: pointer;
+  border-radius: 20px;
+  background: var(--thumb-bg-color, #007bff);
+  cursor: pointer;
+  transition: width 0.2s, height 0.2s;
 }
+
+.padknob {
+  padding-top: 5px;
+}
+
 
 input[type="checkbox"]:checked {
   accent-color: var(--thumb-bg-color);
+  background-color: none;
 }
 
 .controls-spacers {
@@ -451,6 +586,20 @@ input[type="checkbox"]:checked {
 }
 
 .inp-pad {
-  padding-top: 4px;
+  padding-top: 20px;
 }
 
+#svgContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+  padding-top: 4px;
+}
+svg {
+  width: 50px; /* Adjust the size as needed */
+  height: 50px; /* Adjust the size as needed */
+}
+#myCheckbox {
+  display: none; /* Hide the checkbox */
+}
