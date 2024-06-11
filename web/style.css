@@ -699,3 +699,7 @@ svg {
 #hidden-link {
   display: none;
 }
+
+..dropzone .dz-preview.dz-image-preview {
+z-index: 0;
+}
