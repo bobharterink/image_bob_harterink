@@ -7,22 +7,115 @@
     <title>Document</title>
     <style>
         #instruction {
-            color: red;
-            font-weight: bold;
+            color: black;
         }
+
+        body, html {
+            font-family: "Outfit", sans-serif;
+            font-weight: 500;
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px; /* Adds space between buttons */
+        }
+
+        button {
+            font-family: inherit; /* Inherit the font-family from the parent */
+            font-size: inherit;
+            padding: 8px;
+            background-color: var(--thumb-bg-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: var(--hover-bg-color);
+        }
+
+        #state, #instruction, #preview {
+            margin-top: 10px;
+        }
+
+        #state {
+display: none;        }
+
+#printing-status{
+	position: relative;
+	color: #000;
+	background: #fff;
+	mix-blend-mode: multiply;
+  overflow: hidden;
+  padding-left: 8px;
+}
+#printing-status::before{
+	content: "";
+	position: absolute;
+	top:0;right:0;bottom:0;left:-100%;
+	background: white repeating-linear-gradient(90deg, #14ffe9 0%, #ffc800 16.66666%, #ff00e0 33.33333%, #14ffe9 50.0%);
+	mix-blend-mode: screen;
+	pointer-events: none;
+  animation: move 1s linear infinite;
+}
+
+@keyframes move{
+  0%{transform: translateX(0);}
+  100%{transform: translateX(50%);}
+}
+
+@supports not (mix-blend-mode: multiply) {
+	.rainbow-text{
+	-webkit-text-fill-color: transparent;
+	background-clip: text !important;
+	background: white repeating-linear-gradient(90deg, #14ffe9, #ffc800, #ff00e0, #14ffe9);
+    text-shadow: none;
+	}
+	.rainbow-text::before{ content: none; }
+}
+
+
+.container{
+  display: flex;
+  background: #ffffff url(http://api.thumbr.it/whitenoise-300x300.png?background=eeeeeeff&noise=000000&density=15&opacity=10) center;
+}
+
+#print {
+    padding-left: 68px;
+    padding-right: 68px;
+}
+
+#pen-loaded {
+    padding-left: 10px;
+    padding-right: 10px;
+}
     </style>
 </head>
 
 <body>
 
-
-    <button id="print">PRINT (only press this if ready-to-print)</button>
-    <button id="pen-loaded">PEN LOADED (only press this if new pen loaded)</button>
-
+    
+    <div class="button-container">
+        <button id="print">Print!</button>
+        <button id="pen-loaded">Niewe laag printen!</button>
+    </div>
 
     <div id="state"></div>
     <div id="instruction"></div>
+    <div class="container">
+    <div id="printing-status"></div> <!-- Nieuw div-element toegevoegd -->
+    </div>
     <div id="preview"></div>
+
+
     <script type="module">
         async function queryState() {
             const response = await fetch('/api/axidraw/state');
@@ -30,38 +123,41 @@
             console.log(data);
             document.querySelector('#state').innerText = JSON.stringify(data, null, 2);
             document.querySelector('#instruction').innerText = '';
+            document.querySelector('#printing-status').innerText = ''; // Reset printing-status tekst
+
             if (data.state === "ready-to-print") {
                 const color = data.file.color;
-                document.querySelector('#instruction').innerText = `Please put paper, load ${color} pen and press PRINT.`;
+                document.querySelector('#instruction').innerText = `Plaats je gekozen postkaart, en plaats de ${color} pen en druk op 'Print!'`;
             } else if (data.state === "wait-for-pen-swap") {
                 const color = data.file.color;
-                document.querySelector('#instruction').innerText = `Please load ${color} pen and press PEN LOADED.`;
+                document.querySelector('#instruction').innerText = `Plaats de ${color} pen en druk op 'nieuwe laag printen!'`;
             } else if (data.state === "printing") {
-                document.querySelector('#instruction').innerText = `Printing...`;
+                document.querySelector('#printing-status').innerText = `Printing...`; // Tekst naar nieuw element
             }
+
             if (data.file) {
                 document.querySelector('#preview').innerHTML = `<img src="${data.file.filename}">`;
-
             } else {
-                document.querySelector('#preview').innerHTML = '';
-
+                document.querySelector('#preview').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="533" height="397" viewBox="0 0 533 397"/>';
             }
         }
+
         setInterval(queryState, 500);
+
         document.querySelector("#print").addEventListener('click', () => {
             fetch('/api/axidraw/print', {
                 method: 'POST',
             });
-        })
+        });
+
         document.querySelector("#pen-loaded").addEventListener('click', () => {
             fetch('/api/axidraw/pen-loaded', {
                 method: 'POST',
             });
-        })
-
-
-
+        });
     </script>
+    <script src="http://127.0.0.1:5500/web/colorsettings.js"></script>
 </body>
+
 
 </html>

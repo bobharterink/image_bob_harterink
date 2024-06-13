@@ -73,16 +73,16 @@ document.addEventListener("DOMContentLoaded", function () {
     pre.style.backgroundColor = randomLogo.secondaryColor;
   });
 
-  document.documentElement.style.setProperty(
-    "--slider-bg-color",
-    randomLogo.secondaryColor
-  );
-
+  console.log("Setting thumb background color to:", randomLogo.color); // Debugging line
   document.documentElement.style.setProperty(
     "--thumb-bg-color",
     randomLogo.color
   );
 
+  document.documentElement.style.setProperty(
+    "--slider-bg-color",
+    randomLogo.secondaryColor
+  );
   document.documentElement.style.setProperty(
     "--hover-bg-color",
     randomLogo.hoverColor

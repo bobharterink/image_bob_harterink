@@ -87,8 +87,8 @@ window.changeframeSize = changeframeSize;
 
 document.getElementById("downloadSvg").addEventListener("click", async () => {
   // Show the loading spinner
-  const loadingSpinner = document.getElementById("loadingSpinner");
-  loadingSpinner.style.display = "block";
+  /*   const loadingSpinner = document.getElementById("loadingSpinner");
+  loadingSpinner.style.display = "block"; */
 
   const width = 800 / 1.5;
   const height = 595 / 1.5;

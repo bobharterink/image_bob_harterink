@@ -37,8 +37,13 @@ ndbx.embed(options, function (err, player) {
 // This function is called when the size slider is dragged.
 function dotTranslate(e) {
   window.player.setValue("divide1", "b", e.value);
+  window.player.setValue("translate1", "translate", e.translateValue);
 }
 window.dotTranslate = dotTranslate;
+function dotTranslate10(e) {
+  window.player.setValue("colorize2", "stroke", e.value);
+}
+window.dotTranslate10 = dotTranslate10;
 function dotDensity(e) {
   window.player.setValue("golfcode21", "stepX", e.value);
 }
@@ -91,8 +96,8 @@ window.changeframeSize = changeframeSize;
  */
 document.getElementById("downloadSvg").addEventListener("click", async () => {
   // Show the loading spinner
-  const loadingSpinner = document.getElementById("loadingSpinner");
-  loadingSpinner.style.display = "block";
+  /*   const loadingSpinner = document.getElementById("loadingSpinner");
+  loadingSpinner.style.display = "block"; */
 
   const width = 800 / 1.5;
   const height = 595 / 1.5;

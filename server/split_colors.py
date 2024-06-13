@@ -1,33 +1,28 @@
 import re
 import os
-import webcolors
-import math
 
-def hex_to_rgb(hex_color):
-    return webcolors.hex_to_rgb(hex_color)
+def custom_color_mapping(hex_color):
+    color_mapping = {
+        "#FFCB09": "gele",
+        "#F68D2C": "oranje",
+        "#ED1C24": "karmijn",
+        "#D1204E": "donker rode",
+        "#F4899D": "roze",
+        "#A3238E": "lila",
+        "#0B4DA1": "blauwe",
+        "#0095D5": "licht blauwe",
+        "#A1CC3A": "licht groene",
+        "#00A15C": "groene",
+        "#C54B42": "sanguine rode",
+        "#714B3A": "bruine",
+        "#ACC0D3": "licht koud grijze",
+        "#5F6D7F": "donker grijze",
+        "#001722": "zwarte",
+    }
 
-def rgb_distance(rgb1, rgb2):
-    r1, g1, b1 = rgb1
-    r2, g2, b2 = rgb2
-    return math.sqrt((r2 - r1) ** 2 + (g2 - g1) ** 2 + (b2 - b1) ** 2)
+    return color_mapping.get(hex_color.upper(), "unknown")
 
-def find_closest_color(hex_color):
-    rgb_color = hex_to_rgb(hex_color)
-
-    min_distance = float("inf")
-    closest_color = None
-
-    for named_color, named_hex in webcolors.CSS3_NAMES_TO_HEX.items():
-        named_rgb = webcolors.hex_to_rgb(named_hex)
-        distance = rgb_distance(rgb_color, named_rgb)
-
-        if distance < min_distance:
-            min_distance = distance
-            closest_color = named_color
-
-    return closest_color
-
-def split_colors(filename):
+def split_colors(filename, doc_name):
     # Open the SVG file and read its contents
     with open(filename, "r") as f:
         svg_contents = f.read()
@@ -60,7 +55,7 @@ def split_colors(filename):
 
         # Create a new SVG file for each color
         for color, paths in color_paths.items():
-            color_name = find_closest_color(f"#{color}")
+            color_name = custom_color_mapping(f"#{color}")
 
             output_filename = f"{os.path.splitext(filename)[0]}_{color_name}.svg"
             with open(output_filename, "w") as f:
@@ -72,7 +67,7 @@ def split_colors(filename):
                 f.write(svg_footer + "\n")
 
             output_list.append(
-                {"filename": output_filename, "color": color_name, "hex": f"#{color}"}
+                {"filename": output_filename, "color": color_name, "hex": f"#{color}", "doc_name": doc_name}
             )
 
         print(f"Split {filename} into {len(color_paths)} SVG files by color.")
@@ -80,8 +75,3 @@ def split_colors(filename):
     else:
         print(f"Invalid SVG format in {filename}. Unable to split.")
         return []
-
-# Example usage
-if __name__ == "__main__":
-    output_files = split_colors("static/jobs/mm8tk.svg")
-    print(output_files)

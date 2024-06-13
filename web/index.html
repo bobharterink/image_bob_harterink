@@ -95,7 +95,7 @@
                         <div class="color-box" style="background-color: #00A15C;" value="#00A15C" onclick="changedotColor({value: this.getAttribute('value')})" title="Groen"></div>
                         <div class="color-box" style="background-color: #C54B42;" value="#C54B42" onclick="changedotColor({value: this.getAttribute('value')})" title="Sanguine Rood"></div>
                         <div class="color-box" style="background-color: #714B3A;" value="#714B3A" onclick="changedotColor({value: this.getAttribute('value')})" title="Bruin"></div>
-                        <div class="color-box" style="background-color: #ACC0D3;" value="#ACC0D3" onclick="changedotColor({value: this.getAttribute('value')})" title="Light Koud Grijs"></div>
+                        <div class="color-box" style="background-color: #ACC0D3;" value="#ACC0D3" onclick="changedotColor({value: this.getAttribute('value')})" title="Licht Koud Grijs"></div>
                         <div class="color-box" style="background-color: #5F6D7F;" value="#5F6D7F" onclick="changedotColor({value: this.getAttribute('value')})" title="Donker Grijs"></div>
                         <div class="color-box" style="background-color: #001722;" value="#001722" onclick="changedotColor({value: this.getAttribute('value')})" title="Zwart"></div>
                         </div>
@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                             <div class="color-box3" style="background-color: #00A15C;" value="#00A15C" onclick="changedotColor3({value: this.getAttribute('value')})" title="Groen"></div>
                             <div class="color-box3" style="background-color: #C54B42;" value="#C54B42" onclick="changedotColor3({value: this.getAttribute('value')})" title="Sanguine Rood"></div>
                             <div class="color-box3" style="background-color: #714B3A;" value="#714B3A" onclick="changedotColor3({value: this.getAttribute('value')})" title="Bruin"></div>
-                            <div class="color-box3" style="background-color: #ACC0D3;" value="#ACC0D3" onclick="changedotColor3({value: this.getAttribute('value')})" title="Light Koud Grijs"></div>
+                            <div class="color-box3" style="background-color: #ACC0D3;" value="#ACC0D3" onclick="changedotColor3({value: this.getAttribute('value')})" title="Licht Koud Grijs"></div>
                             <div class="color-box3" style="background-color: #5F6D7F;" value="#5F6D7F" onclick="changedotColor3({value: this.getAttribute('value')})" title="Donker Grijs"></div>
                             <div class="color-box3" style="background-color: #001722;" value="#001722" onclick="changedotColor3({value: this.getAttribute('value')})" title="Zwart"></div>
                         </div>
@@ -303,7 +303,20 @@ window.changeframeSize = changeframeSize;
                     </div>
                 </div>
             </div>
+            <div id="popupContainer" class="popup-container" style="display:none;">
+                <div class="popup-content">
+                    <iframe id="dynamicIframe" src="http://127.0.0.1:3000/" width="100%" height="600px" style="border:none;"></iframe>
+                </div>
+            </div>
+            
+            <script>
+                document.getElementById('downloadSvg').addEventListener('click', function() {
+                    document.getElementById('popupContainer').style.display = 'flex';
+                });
+            </script>            
         </div>
+  
+        
         <script src="https://unpkg.com/dropzone@6.0.0-beta.2/dist/dropzone-min.js"></script>
         <script src="https://nodebox.live/api/v1/ndbx.js"></script>
         <script type="module" src="cirkel.js"></script>
@@ -530,12 +543,12 @@ rangeInput.style.setProperty('--width-size', newSize + 'px');
         const circle2 = document.getElementById('circle2');
 
         if (this.checked) {
-            animateCircle(circle1, 47.496, 46.023);
-            animateCircle(circle2, 47.496, 46.023);
-        } else {
-            animateCircle(circle1, 33.514, 34.796);
-            animateCircle(circle2, 73.161, 68.754);
-        }
+                animateCircle(circle1, 53, 53);
+                animateCircle(circle2, 53, 53);
+            } else {
+                animateCircle(circle1, 33.514, 34.796);
+                animateCircle(circle2, 73.161, 68.754);
+            }
     });
 
     function animateCircle(circle, targetCx, targetCy) {

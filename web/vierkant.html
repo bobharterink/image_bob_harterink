@@ -33,6 +33,23 @@
                 <a href="index.html" data-transition="auto">Cirkel</a>  
                 <a href="golf.html" data-transition="auto">Golf</a>
                 <a href="vierkant.html" data-transition="auto">Vierkant</a>
+                <a href="#" id="contact-link" data-transition="auto">Contact</a>
+
+<!-- The Custom Modal -->
+<div id="customModal" class="custom-modal">
+    <!-- Custom Modal content -->
+    <div class="custom-modal-content">
+        <span class="custom-close">&times;</span>
+        <div class="left-section">
+            <h1><img src="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f44b.png" alt="Wave Emoji"> Hallo!</h1>
+            <p>Mijn naam is Bob Harterink en ik heb een passie voor het toegankelijk maken van kunst door mensen het zelf te laten ervaren! Dit probeer ik te bereiken door middel van coderen. Heb je zin om eens te praten over een project? Scan de QR-code voor mijn gegevens.</p>
+        </div>
+        <div class="right-section">
+            <img class="profile-picture" src="bob_harterink.JPG" alt="Profile Picture">
+            <img class="qr-code" src="frame.png" alt="QR Code">
+        </div>
+    </div>
+</div>                
             </div>
         </nav>
         <div class="main-wrapper">
@@ -505,8 +522,8 @@ rangeInput.style.setProperty('--width-size', newSize + 'px');
             const rect2 = document.getElementById('rect2');
 
             if (this.checked) {
-                animateRectangle(rect1, 47.496 - 13.2, 46.023 - 13.2); // Center of the square
-                animateRectangle(rect2, 47.496 - 14.9, 46.023 - 14.9); // Center of the square
+                animateRectangle(rect1, 53 - 13.2, 53 - 13.2); // Center of the square
+                animateRectangle(rect2, 53 - 14.9, 53 - 14.9); // Center of the square
             } else {
                 animateRectangle(rect1, 33.514 - 13.2, 34.796 - 13.2); // Center of the square
                 animateRectangle(rect2, 73.161 - 14.9, 68.754 - 14.9); // Center of the square
@@ -538,6 +555,34 @@ rangeInput.style.setProperty('--width-size', newSize + 'px');
 
         // Automatically trigger the change event to handle initial state
         document.getElementById('myCheckbox').dispatchEvent(new Event('change'));
+    </script>
+    <script>
+        // Get the custom modal
+        var customModal = document.getElementById("customModal");
+    
+        // Get the button that opens the custom modal
+        var btn = document.getElementById("contact-link");
+    
+        // Get the <span> element that closes the custom modal
+        var span = document.getElementsByClassName("custom-close")[0];
+    
+        // When the user clicks the button, open the custom modal 
+        btn.onclick = function(event) {
+            event.preventDefault(); // Prevent default anchor behavior
+            customModal.style.display = "block";
+        }
+    
+        // When the user clicks on <span> (x), close the custom modal
+        span.onclick = function() {
+            customModal.style.display = "none";
+        }
+    
+        // When the user clicks anywhere outside of the custom modal, close it
+        window.onclick = function(event) {
+            if (event.target == customModal) {
+                customModal.style.display = "none";
+            }
+        }
     </script>
 </body>
 </html>
