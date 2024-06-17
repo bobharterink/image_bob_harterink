@@ -133,8 +133,8 @@ document.getElementById("downloadSvg").addEventListener("click", async () => {
   // Upload the modified SVG
   await uploadSvg(modifiedSvg);
 
-  // Hide the loading spinner
-  loadingSpinner.style.display = "none";
+  // Direct na het uploaden de pagina omleiden
+  window.location.href = "http://localhost:3000/"; // Vervang door de gewenste URL
 });
 
 async function uploadSvg(svg) {
