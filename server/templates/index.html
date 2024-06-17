@@ -2,9 +2,11 @@
 <html lang="en">
 
 <head>
+    <link id="favicon" rel="icon" href="http://127.0.0.1:5500/web/favicon1.ico?v=2" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="http://127.0.0.1:5500/web/style.css">
     <style>
         #instruction {
             color: black;
@@ -15,11 +17,21 @@
             font-weight: 500;
             height: 100%;
             margin: 0;
+/*             display: flex;
+ */            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .maker {
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
             flex-direction: column;
+            width: 100%;
+            height: 100%;
         }
 
         .button-container {
@@ -101,11 +113,28 @@ display: none;        }
 </head>
 
 <body>
-
-    
+    <div id="loading-screen">
+        <div class="outer-circle">
+            <div class="middle-circle">
+                <div class="inner-circle"></div>
+            </div>
+        </div>
+        <div class="text-container">
+            <div class="text">Door het oog van de maker</div>
+        </div>
+    </div>
+<div id="content" style="display: block;">
+    <nav>
+        <div class="logo-title">
+            <a class="logohref" href="https://picturemod.netlify.app/web/index.html"><img id="logo" src="" alt="Logo" class="logo"></a>
+            <span class="site-title">Door het oog van de maker</span>
+        </div>
+        <div class="nav-links"></div>
+    </nav>
+    <div class="maker">
     <div class="button-container">
         <button id="print">Print!</button>
-        <button id="pen-loaded">Niewe laag printen!</button>
+        <button id="pen-loaded">Nieuwe kleur printen!</button>
     </div>
 
     <div id="state"></div>
@@ -114,7 +143,8 @@ display: none;        }
     <div id="printing-status"></div> <!-- Nieuw div-element toegevoegd -->
     </div>
     <div id="preview"></div>
-
+    </div>
+</div>
 
     <script type="module">
         async function queryState() {
@@ -130,7 +160,7 @@ display: none;        }
                 document.querySelector('#instruction').innerText = `Plaats je gekozen postkaart, en plaats de ${color} pen en druk op 'Print!'`;
             } else if (data.state === "wait-for-pen-swap") {
                 const color = data.file.color;
-                document.querySelector('#instruction').innerText = `Plaats de ${color} pen en druk op 'nieuwe laag printen!'`;
+                document.querySelector('#instruction').innerText = `Plaats de ${color} pen en druk op 'nieuwe kleur printen!'`;
             } else if (data.state === "printing") {
                 document.querySelector('#printing-status').innerText = `Printing...`; // Tekst naar nieuw element
             }
@@ -138,7 +168,10 @@ display: none;        }
             if (data.file) {
                 document.querySelector('#preview').innerHTML = `<img src="${data.file.filename}">`;
             } else {
-                document.querySelector('#preview').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="533" height="397" viewBox="0 0 533 397"/>';
+                document.querySelector('#print').style.display = `none`;
+                document.querySelector('#pen-loaded').style.display = `none`;
+                document.querySelector('#instruction').innerText = `Je postkaart is klaar!`;
+                document.querySelector('#preview').innerHTML = '        <button id="home">terug naar home</button>';
             }
         }
 
@@ -156,7 +189,8 @@ display: none;        }
             });
         });
     </script>
-    <script src="http://127.0.0.1:5500/web/colorsettings.js"></script>
+<!--     <script src="http://127.0.0.1:5500/web/colorsettings.js"></script>
+ -->    <script src="http://127.0.0.1:5500/web/script3.js"></script>
 </body>
 
 
