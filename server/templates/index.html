@@ -157,6 +157,8 @@ display: none;        }
 
             if (data.state === "ready-to-print") {
                 const color = data.file.color;
+                document.querySelector('#print').style.display = `block`;
+                document.querySelector('#pen-loaded').style.display = `block`;
                 document.querySelector('#instruction').innerText = `Plaats je gekozen postkaart, en plaats de ${color} pen en druk op 'Print!'`;
             } else if (data.state === "wait-for-pen-swap") {
                 const color = data.file.color;
@@ -171,7 +173,7 @@ display: none;        }
                 document.querySelector('#print').style.display = `none`;
                 document.querySelector('#pen-loaded').style.display = `none`;
                 document.querySelector('#instruction').innerText = `Je postkaart is klaar!`;
-                document.querySelector('#preview').innerHTML = '        <button id="home">terug naar home</button>';
+                document.querySelector('#preview').innerHTML = '        <button id="home" onclick="redirectToPage()">terug naar home</button>';
             }
         }
 
@@ -189,6 +191,12 @@ display: none;        }
             });
         });
     </script>
+        <script>
+            function redirectToPage() {
+                // Vervang 'https://www.voorbeeld.com' door de URL waar je naar toe wilt gaan
+                window.location.href = 'https://picturemod.netlify.app/';
+            }
+        </script>
 <!--     <script src="http://127.0.0.1:5500/web/colorsettings.js"></script>
  -->    <script src="http://127.0.0.1:5500/web/script3.js"></script>
 </body>

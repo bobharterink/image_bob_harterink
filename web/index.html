@@ -303,24 +303,7 @@ window.changeframeSize = changeframeSize;
                     </div>
                 </div>
             </div>
-            <div id="popupContainer" class="popup-container" style="display:none;">
-                <div class="popup-content">
-                    <iframe id="dynamicIframe" src="http://127.0.0.1:3000/" width="100%" height="600px" style="border:none;"></iframe>
-                </div>
-            </div>
-            
-<script>
-    document.getElementById('downloadSvg').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent full page reload
-        document.getElementById('popupContainer').style.display = 'flex';
-        updateIframe(); // Call the function to update the iframe
-    });
-
-    function updateIframe() {
-        var iframe = document.getElementById('dynamicIframe');
-        iframe.src = iframe.src + '?v=' + new Date().getTime(); // Update the iframe source with a timestamp
-    }
-</script>           
+          
         </div>
   
         
