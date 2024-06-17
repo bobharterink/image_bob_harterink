@@ -666,77 +666,89 @@ svg:hover {
           background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
       }
 
-      /* Custom Modal Content/Box */
-      .custom-modal-content {
-          background-color: #fefefe;
-          margin: 15% auto; /* 15% from the top and centered */
-          padding: 20px;
-          width: 30%; /* Adjust as needed */
-          position: relative; /* Relative positioning for the close button */
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: space-between;      }
-
-        /* The Close Button */
-        .custom-close {
-          color: #aaa;
-          font-size: 30px;
-          position: absolute;
-          top: 1px;
-          right: 10px;
-      }
-
-      .custom-close:hover,
-      .custom-close:focus {
-          color: black;
-          text-decoration: none;
-          cursor: pointer;
-      }
-
-      
- /* Content styles */
- .left-section {
-  width: 60%;
-  padding-right: 20px;
-}
-
-.left-section h1 {
-  display: flex;
-  align-items: center;
-  font-size: 24px;
-  font-weight: 500;
-}
-
-.left-section h1 img {
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
-}
-
-.left-section p {
-  font-size: 16px;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.right-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.right-section img.profile-picture {
-  border-radius: 50%;
-  width: 150px;
-  height: 150px;
-  margin-bottom: 20px;
-}
-
-.right-section img.qr-code {
-  width: 150px;
-  height: 150px;
-}
+      .custom-modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+    
+    /* Custom Modal Content/Box */
+    .custom-modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        width: 30%; /* Adjust as needed */
+        position: relative; /* Relative positioning for the close button */
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+    
+    /* The Close Button */
+    .custom-close {
+        color: #aaa;
+        font-size: 30px;
+        position: absolute;
+        top: 1px;
+        right: 10px;
+    }
+    
+    .custom-close:hover,
+    .custom-close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    /* Content styles */
+    .left-section {
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+    }
+    
+    .left-section img.profile-picture {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        margin-bottom: 20px;
+    }
+    
+    .left-section img.qr-code {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .right-section {
+        width: 70%;
+    }
+    
+    .right-section h1 {
+        display: flex;
+        align-items: center;
+        font-size: 24px;
+        font-weight: 500;
+        margin: 0px;
+    }
+    
+    .right-section h1 img {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+    }
+    
+    .right-section p {
+        font-size: 16px;
+        line-height: 1.5;
+        font-weight: 400;
+    }
 
 #hidden-link {
   display: none;
