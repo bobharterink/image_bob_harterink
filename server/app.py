@@ -22,10 +22,13 @@ def check_for_files():
     global server_state, files_to_print
     while True:
         if server_state == SERVER_STATE_IDLE:
-            files_to_print = get_doc_with_split_colors()
-            
-            if files_to_print:
+            new_files = get_doc_with_split_colors()
+            if new_files:
+                files_to_print.extend(new_files)
                 server_state = SERVER_STATE_READY_TO_PRINT
+                print(f"New files added: {new_files}")
+            else:
+                print("No new files found.")
         time.sleep(5)  # Wait for 5 seconds before checking again
 
 @app.route("/")

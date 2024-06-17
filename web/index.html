@@ -31,7 +31,7 @@
             </div>
             <div class="nav-links">
                 <a href="docs.html" data-transition="auto" id="hidden-link">Docs</a>  
-                <a href="index.html" data-transition="auto">Cirkel</a>  
+                <a href="#" data-transition="auto" style="color: var(--thumb-bg-color);">Cirkel</a>  
                 <a href="golf.html" data-transition="auto">Golf</a>
                 <a href="vierkant.html" data-transition="auto">Vierkant</a>
                 <a href="#" id="contact-link" data-transition="auto">Contact</a>
@@ -43,7 +43,7 @@
                         }
                     });
                 </script>
-<!-- The Custom Modal -->
+<!-- The Custom Modal -->   
 <div id="customModal" class="custom-modal">
     <!-- Custom Modal content -->
     <div class="custom-modal-content">
@@ -309,11 +309,18 @@ window.changeframeSize = changeframeSize;
                 </div>
             </div>
             
-            <script>
-                document.getElementById('downloadSvg').addEventListener('click', function() {
-                    document.getElementById('popupContainer').style.display = 'flex';
-                });
-            </script>            
+<script>
+    document.getElementById('downloadSvg').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent full page reload
+        document.getElementById('popupContainer').style.display = 'flex';
+        updateIframe(); // Call the function to update the iframe
+    });
+
+    function updateIframe() {
+        var iframe = document.getElementById('dynamicIframe');
+        iframe.src = iframe.src + '?v=' + new Date().getTime(); // Update the iframe source with a timestamp
+    }
+</script>           
         </div>
   
         

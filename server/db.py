@@ -21,48 +21,34 @@ query = {
 }
 
 def get_doc_ready_to_print():
-    # Convert the query to JSON
-
     query_json = json.dumps(query)
+    response = requests.post(query_url, headers={"Content-Type": "application/json"}, data=query_json)
 
-    # Send the POST request and get the response
-    response = requests.post(
-        query_url, headers={"Content-Type": "application/json"}, data=query_json
-    )
-
-    # Checking if the request was successful
     if response.status_code == 200:
         response_data = response.json()
-
-        # Extract the first document's URL if there are any results
-        if response_data:
-            first_document = response_data[0]["document"]
-            doc_name = first_document["name"]  # Document name including the path
-            svg_url = first_document["fields"]["url"]["stringValue"]
-            print(f"The first SVG URL is: {svg_url}")
-
-            # Download the SVG url as a file in the "jobs" directory
-            svg_basename = os.path.basename(svg_url)
-            svg_filename = f"static/jobs/{svg_basename}"
-            svg_response = requests.get(svg_url)
-            with open(svg_filename, "wb") as f:
-                f.write(svg_response.content)
-            print(f"Downloaded SVG file as: {svg_filename}")
-            return svg_filename, doc_name
+        documents = [doc["document"] for doc in response_data if "document" in doc]
+        
+        if documents:
+            for document in documents:
+                doc_name = document["name"]
+                svg_url = document["fields"]["url"]["stringValue"]
+                svg_basename = os.path.basename(svg_url)
+                svg_filename = f"static/jobs/{svg_basename}"
+                svg_response = requests.get(svg_url)
+                with open(svg_filename, "wb") as f:
+                    f.write(svg_response.content)
+                yield svg_filename, doc_name
         else:
-            print("No documents found with the status 'ready-to-print'.")
-            return None, None
+            yield None, None
     else:
-        print(f"Failed to fetch documents. Status code: {response.status_code}")
-        return None, None
+        yield None, None
 
 def get_doc_with_split_colors():
-    svg_filename, doc_name = get_doc_ready_to_print()
-    if svg_filename:
-        output_files = split_colors(svg_filename, doc_name)
-        return output_files
-    else:
-        return None
+    output_files = []
+    for svg_filename, doc_name in get_doc_ready_to_print():
+        if svg_filename:
+            output_files.extend(split_colors(svg_filename, doc_name))
+    return output_files
 
 def update_doc_status(doc_name, status):
     update_url = f"https://firestore.googleapis.com/v1/{doc_name}?updateMask.fieldPaths=status"
@@ -71,11 +57,7 @@ def update_doc_status(doc_name, status):
             "status": {"stringValue": status}
         }
     }
-    response = requests.patch(
-        update_url,
-        headers={"Content-Type": "application/json"},
-        data=json.dumps(update_data)
-    )
+    response = requests.patch(update_url, headers={"Content-Type": "application/json"}, data=json.dumps(update_data))
     if response.status_code == 200:
         print(f"Document {doc_name} status updated to {status}.")
     else:

@@ -29,12 +29,20 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Smooth scrolling for internal links
-  document.querySelectorAll("nav a").forEach((anchor) => {
+  document.querySelectorAll("nav.sidebar-nav a").forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault();
       const targetId = this.getAttribute("href");
       if (targetId && targetId !== "#") {
-        document.querySelector(targetId).scrollIntoView({
+        const targetElement = document.querySelector(targetId);
+        const yOffset = -100; // Offset om iets minder ver te scrollen (hier 50 pixels)
+        const y =
+          targetElement.getBoundingClientRect().top +
+          window.pageYOffset +
+          yOffset;
+
+        window.scrollTo({
+          top: y,
           behavior: "smooth",
         });
       }

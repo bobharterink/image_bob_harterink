@@ -196,6 +196,10 @@ nav .nav-links a {
   font-weight: 400;
 }
 
+.nav-links a:hover {
+  color: var(--thumb-bg-color);
+}
+
 .logohref {
 height: 40px;
 }
@@ -701,6 +705,7 @@ svg:hover {
   display: flex;
   align-items: center;
   font-size: 24px;
+  font-weight: 500;
 }
 
 .left-section h1 img {
@@ -712,6 +717,7 @@ svg:hover {
 .left-section p {
   font-size: 16px;
   line-height: 1.5;
+  font-weight: 400;
 }
 
 .right-section {
