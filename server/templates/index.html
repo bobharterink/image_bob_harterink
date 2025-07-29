@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link id="favicon" rel="icon" href="http://127.0.0.1:5500/web/favicon1.ico?v=2" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="http://127.0.0.1:5500/web/style.css">
+    <style>
+        #instruction {
+            color: black;
+        }
+
+        body, html {
+            font-family: "Outfit", sans-serif;
+            font-weight: 500;
+            height: 100%;
+            margin: 0;
+/*             display: flex;
+ */            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .maker {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px; /* Adds space between buttons */
+        }
+
+        button {
+            font-family: inherit; /* Inherit the font-family from the parent */
+            font-size: inherit;
+            padding: 8px;
+            background-color: var(--thumb-bg-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: var(--hover-bg-color);
+        }
+
+        #state, #instruction, #preview {
+            margin-top: 10px;
+        }
+
+        #state {
+display: none;        }
+
+#printing-status{
+	position: relative;
+	color: #000;
+	background: #fff;
+	mix-blend-mode: multiply;
+  overflow: hidden;
+  padding-left: 8px;
+}
+#printing-status::before{
+	content: "";
+	position: absolute;
+	top:0;right:0;bottom:0;left:-100%;
+	background: white repeating-linear-gradient(90deg, #14ffe9 0%, #ffc800 16.66666%, #ff00e0 33.33333%, #14ffe9 50.0%);
+	mix-blend-mode: screen;
+	pointer-events: none;
+  animation: move 1s linear infinite;
+}
+
+@keyframes move{
+  0%{transform: translateX(0);}
+  100%{transform: translateX(50%);}
+}
+
+@supports not (mix-blend-mode: multiply) {
+	.rainbow-text{
+	-webkit-text-fill-color: transparent;
+	background-clip: text !important;
+	background: white repeating-linear-gradient(90deg, #14ffe9, #ffc800, #ff00e0, #14ffe9);
+    text-shadow: none;
+	}
+	.rainbow-text::before{ content: none; }
+}
+
+
+.container{
+  display: flex;
+  background: #ffffff url(http://api.thumbr.it/whitenoise-300x300.png?background=eeeeeeff&noise=000000&density=15&opacity=10) center;
+}
+
+#print {
+    padding-left: 68px;
+    padding-right: 68px;
+}
+
+#pen-loaded {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+    </style>
+</head>
+
+<body>
+    <div id="loading-screen">
+        <div class="outer-circle">
+            <div class="middle-circle">
+                <div class="inner-circle"></div>
+            </div>
+        </div>
+        <div class="text-container">
+            <div class="text">Door het oog van de maker</div>
+        </div>
+    </div>
+<div id="content" style="display: block;">
+    <nav>
+        <div class="logo-title">
+            <a class="logohref" href="https://picturemod.netlify.app/"><img id="logo" src="" alt="Logo" class="logo"></a>
+            <span class="site-title">Door het oog van de maker</span>
+        </div>
+        <div class="nav-links"></div>
+    </nav>
+    <div class="maker">
+    <div class="button-container">
+        <button id="print">Print!</button>
+        <button id="pen-loaded">Nieuwe kleur printen!</button>
+    </div>
+
+    <div id="state"></div>
+    <div id="instruction"></div>
+    <div class="container">
+    <div id="printing-status"></div> <!-- Nieuw div-element toegevoegd -->
+    </div>
+    <div id="preview"></div>
+    </div>
+</div>
+
+    <script type="module">
+        async function queryState() {
+            const response = await fetch('/api/axidraw/state');
+            const data = await response.json();
+            console.log(data);
+            document.querySelector('#state').innerText = JSON.stringify(data, null, 2);
+            document.querySelector('#instruction').innerText = '';
+            document.querySelector('#printing-status').innerText = ''; // Reset printing-status tekst
+
+            if (data.state === "ready-to-print") {
+                const color = data.file.color;
+                document.querySelector('#print').style.display = `block`;
+                document.querySelector('#pen-loaded').style.display = `block`;
+                document.querySelector('#instruction').innerText = `Plaats je gekozen postkaart, en plaats de ${color} pen en druk op 'Print!'`;
+            } else if (data.state === "wait-for-pen-swap") {
+                const color = data.file.color;
+                document.querySelector('#instruction').innerText = `Plaats de ${color} pen en druk op 'nieuwe kleur printen!'`;
+            } else if (data.state === "printing") {
+                document.querySelector('#printing-status').innerText = `Printing...`; // Tekst naar nieuw element
+            }
+
+            if (data.file) {
+                document.querySelector('#preview').innerHTML = `<img src="${data.file.filename}">`;
+            } else {
+                document.querySelector('#print').style.display = `none`;
+                document.querySelector('#pen-loaded').style.display = `none`;
+                document.querySelector('#instruction').innerText = `Je postkaart is klaar!`;
+                document.querySelector('#preview').innerHTML = '        <button id="home" onclick="redirectToPage()">Terug</button>';
+            }
+        }
+
+        setInterval(queryState, 500);
+
+        document.querySelector("#print").addEventListener('click', () => {
+            fetch('/api/axidraw/print', {
+                method: 'POST',
+            });
+        });
+
+        document.querySelector("#pen-loaded").addEventListener('click', () => {
+            fetch('/api/axidraw/pen-loaded', {
+                method: 'POST',
+            });
+        });
+    </script>
+        <script>
+            function redirectToPage() {
+                // Vervang 'https://www.voorbeeld.com' door de URL waar je naar toe wilt gaan
+                window.location.href = 'https://picturemod.netlify.app/';
+            }
+        </script>
+<!--     <script src="http://127.0.0.1:5500/web/colorsettings.js"></script>
+ -->    <script src="http://127.0.0.1:5500/web/script3.js"></script>
+</body>
+
+
+</html>
