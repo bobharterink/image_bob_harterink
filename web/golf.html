@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link id="favicon" rel="icon" href="favicon1.ico?v=2" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Door het oog van de maker</title>
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@6.0.0-beta.2/dist/dropzone.css" />
+    <link rel="stylesheet" href="stylesgolf.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="loading-screen">
+        <div class="outer-circle">
+            <div class="middle-circle">
+                <div class="inner-circle"></div>
+            </div>
+        </div>
+        <div class="text-container">
+            <div class="text">Door het oog van de maker</div>
+        </div>
+    </div>
+    <div class="cover-screen"></div>
+    <div id="content" style="display: none;">
+        <nav>
+            <div class="logo-title">
+                <a class="logohref" href="https://picturemod.netlify.app/"><img id="logo" src="" alt="Logo" class="logo"></a>
+                <span class="site-title">Door het oog van de maker</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" data-transition="auto">Cirkel</a>  
+                <a href="#" data-transition="auto" style="color: var(--thumb-bg-color);">Golf</a>
+                <a href="vierkant.html" data-transition="auto">Vierkant</a>
+                <a href="#" id="contact-link" data-transition="auto">Contact</a>
+
+<!-- The Custom Modal -->   
+<div id="customModal" class="custom-modal">
+    <!-- Custom Modal content -->
+    <div class="custom-modal-content">
+        <span class="custom-close">&times;</span>
+        <div class="left-section">
+            <img class="profile-picture" src="bob_harterink.JPG" alt="Profile Picture">
+            <img class="qr-code" src="frame.png" alt="QR Code">
+        </div>
+        <div class="right-section">
+            <h1>👋🏻 Hallo!</h1>
+            <p>Mijn naam is Bob Harterink en ik heb een passie voor het toegankelijk maken van kunst. Ik geloof erin dat mensen kunst het beste kunnen waarderen door het zelf te maken.</p>
+            <p>Daarom ontwikkel ik websites die kunst voor iedereen toegankelijk maken. Heb je interesse om eens te praten over een project, of ben je gewoon nieuwsgierig? Scan de QR-code en sla mijn contactgegevens direct op.</p>
+        </div>
+    </div>
+</div>
+            </div>
+        </nav>
+        <div class="main-wrapper">
+            <div class="main-content">
+                <canvas width="800" height="595" id="mycanvas3"></canvas>
+                <div class="sidebar" id="sidebarpara">
+                    <div id="drop_zone" class="disabled dropzone">
+                        <div class="dz-message" data-dz-message><span>Click hier om een foto te maken om je postkaartje te personaliseren!</span></div>
+                    </div>
+<!-- Modal Structure -->
+<div id="cameraModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <video id="camera" autoplay style="width: 100%; filter: blur(10px);"></video>
+        <button id="captureButton" class="styled-button">Cheese!</button>
+    </div>
+</div>
+
+                    <div class="controls">
+                    <div class="controls-spacers">
+                    <div class="color-container">
+                        <div class="color-box" style="background-color: #FFCB09;" value="#FFCB09" onclick="changedotColor({value: this.getAttribute('value')})" title="Geel"></div>
+                        <div class="color-box" style="background-color: #F68D2C;" value="#F68D2C" onclick="changedotColor({value: this.getAttribute('value')})" title="Oranje"></div>
+                        <div class="color-box" style="background-color: #ED1C24;" value="#ED1C24" onclick="changedotColor({value: this.getAttribute('value')})" title="Karmijn"></div>
+                        <div class="color-box" style="background-color: #D1204E;" value="#D1204E" onclick="changedotColor({value: this.getAttribute('value')})" title="Donker Rood"></div>
+                        <div class="color-box" style="background-color: #F4899D;" value="#F4899D" onclick="changedotColor({value: this.getAttribute('value')})" title="Roze"></div>
+                        <div class="color-box" style="background-color: #A3238E;" value="#A3238E" onclick="changedotColor({value: this.getAttribute('value')})" title="Lila"></div>
+                        <div class="color-box" style="background-color: #0B4DA1;" value="#0B4DA1" onclick="changedotColor({value: this.getAttribute('value')})" title="Blauw"></div>
+                        <div class="color-box" style="background-color: #0095D5;" value="#0095D5" onclick="changedotColor({value: this.getAttribute('value')})" title="Licht Blauw"></div>
+                        <div class="color-box" style="background-color: #A1CC3A;" value="#A1CC3A" onclick="changedotColor({value: this.getAttribute('value')})" title="Licht Groen"></div>
+                        <div class="color-box" style="background-color: #00A15C;" value="#00A15C" onclick="changedotColor({value: this.getAttribute('value')})" title="Groen"></div>
+                        <div class="color-box" style="background-color: #C54B42;" value="#C54B42" onclick="changedotColor({value: this.getAttribute('value')})" title="Sanguine Rood"></div>
+                        <div class="color-box" style="background-color: #714B3A;" value="#714B3A" onclick="changedotColor({value: this.getAttribute('value')})" title="Bruin"></div>
+                        <div class="color-box" style="background-color: #ACC0D3;" value="#ACC0D3" onclick="changedotColor({value: this.getAttribute('value')})" title="Light Koud Grijs"></div>
+                        <div class="color-box selected" style="background-color: #5F6D7F;" value="#5F6D7F" onclick="changedotColor({value: this.getAttribute('value')})" title="Donker Grijs"></div>
+                        <div class="color-box" style="background-color: #001722;" value="#001722" onclick="changedotColor({value: this.getAttribute('value')})" title="Zwart"></div>
+                        </div>
+                        <script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    let activeDiv = document.querySelector('.color-box.selected');
+
+    document.querySelectorAll('.color-box').forEach(div => {
+        div.addEventListener('click', () => {
+            if (activeDiv) {
+                activeDiv.classList.remove('selected');
+            }
+            div.classList.add('selected');
+            activeDiv = div;
+
+            // Get the background color of the selected color box
+            const color = div.style.backgroundColor;
+
+            // Set the stroke color of circle1 in the SVG
+            document.getElementById('path1').setAttribute('stroke', color);
+            document.getElementById('path2').setAttribute('stroke', color);
+            document.getElementById('path3').setAttribute('stroke', color);
+            document.getElementById('path4').setAttribute('stroke', color);
+            document.getElementById('path5').setAttribute('stroke', color);
+        });
+    });
+});
+
+    </script>
+                            <label class="wd-knb"><input class="wideknob" type="range" min="70" max="90" step="1" value="77" oninput="dotDensity(this)"></label>
+
+                        <label class="padknob"><input class="wideknob2" type="range" min="6" max="10" step="1" value="7" oninput="changedotSize(this)"></label>
+                        <label class="padknob"><input class="sizeknob2"  type="range" min="1" max="3" step="0.1" value="2" oninput="changedotSize2(this)"></label>
+                        
+                        <input type="checkbox" id="myCheckbox1">
+
+                        <!-- Container for SVG -->
+                        <div id="svgContainer1">
+                            <!-- Initial SVG content (wave-03.svg) -->
+                            <svg id="aa" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="33.867mm" height="32.14mm" viewBox="0 0 96 91.106">
+                                <path id="paths-1" d="M13.647 25.476 L82.541 25.476" fill="#231f20" stroke-width="0"></path>
+                                <path id="paths-2" d="M13.609 34.215 L82.089 34.215" fill="#231f20" stroke-width="0"></path>
+                                <path id="paths-3" d="M13.572 43.453 L81.637 43.453" fill="#231f20" stroke-width="0"></path>
+                                <path id="paths-4" d="M13.534 52.693 L81.186 52.693" fill="#231f20" stroke-width="0"></path>
+                                <path id="paths-5" d="M13.497 61.932 L80.734 61.932" fill="#231f20" stroke-width="0"></path>
+                            </svg>
+                        </div>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', (event) => {
+    const hoverTarget = document.querySelector('#aa');
+
+    hoverTarget.addEventListener('click', () => {
+        hoverTarget.classList.toggle('hover-effect');
+    });
+});
+                        </script>
+                    </div>
+
+                    <div class="controls-spacers">
+
+                        <div class="color-container">
+                            <div class="color-box3" style="background-color: #FFCB09;" value="#FFCB09" onclick="changedotColor3({value: this.getAttribute('value')})" title="Geel"></div>
+                            <div class="color-box3" style="background-color: #F68D2C;" value="#F68D2C" onclick="changedotColor3({value: this.getAttribute('value')})" title="Oranje"></div>
+                            <div class="color-box3" style="background-color: #ED1C24;" value="#ED1C24" onclick="changedotColor3({value: this.getAttribute('value')})" title="Karmijn"></div>
+                            <div class="color-box3" style="background-color: #D1204E;" value="#D1204E" onclick="changedotColor3({value: this.getAttribute('value')})" title="Donker Rood"></div>
+                            <div class="color-box3" style="background-color: #F4899D;" value="#F4899D" onclick="changedotColor3({value: this.getAttribute('value')})" title="Roze"></div>
+                            <div class="color-box3" style="background-color: #A3238E;" value="#A3238E" onclick="changedotColor3({value: this.getAttribute('value')})" title="Lila"></div>
+                            <div class="color-box3" style="background-color: #0B4DA1;" value="#0B4DA1" onclick="changedotColor3({value: this.getAttribute('value')})" title="Blauw"></div>
+                            <div class="color-box3" style="background-color: #0095D5;" value="#0095D5" onclick="changedotColor3({value: this.getAttribute('value')})" title="Licht Blauw"></div>
+                            <div class="color-box3" style="background-color: #A1CC3A;" value="#A1CC3A" onclick="changedotColor3({value: this.getAttribute('value')})" title="Licht Groen"></div>
+                            <div class="color-box3 selected" style="background-color: #00A15C;" value="#00A15C" onclick="changedotColor3({value: this.getAttribute('value')})" title="Groen"></div>
+                            <div class="color-box3" style="background-color: #C54B42;" value="#C54B42" onclick="changedotColor3({value: this.getAttribute('value')})" title="Sanguine Rood"></div>
+                            <div class="color-box3" style="background-color: #714B3A;" value="#714B3A" onclick="changedotColor3({value: this.getAttribute('value')})" title="Bruin"></div>
+                            <div class="color-box3" style="background-color: #ACC0D3;" value="#ACC0D3" onclick="changedotColor3({value: this.getAttribute('value')})" title="Light Koud Grijs"></div>
+                            <div class="color-box3" style="background-color: #5F6D7F;" value="#5F6D7F" onclick="changedotColor3({value: this.getAttribute('value')})" title="Donker Grijs"></div>
+                            <div class="color-box3" style="background-color: #001722;" value="#001722" onclick="changedotColor3({value: this.getAttribute('value')})" title="Zwart"></div>
+                        </div>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', (event) => {
+                                let activeDiv = document.querySelector('.color-box3.selected');
+                    
+                                document.querySelectorAll('.color-box3').forEach(div => {
+                                    div.addEventListener('click', () => {
+                                        if (activeDiv) {
+                                            activeDiv.classList.remove('selected');
+                                        }
+                                        div.classList.add('selected');
+                                        activeDiv = div;
+
+                                                    // Get the background color of the selected color box
+                                        const color = div.style.backgroundColor;
+
+            // Set the stroke color of circle1 in the SVG
+                                        document.getElementById('paths-1').setAttribute('stroke', color);
+                                        document.getElementById('paths-2').setAttribute('stroke', color);
+                                        document.getElementById('paths-3').setAttribute('stroke', color);
+                                        document.getElementById('paths-4').setAttribute('stroke', color);
+                                        document.getElementById('paths-5').setAttribute('stroke', color);
+                                    });
+                                });
+                            });
+                        </script>
+                                                    <label class="wd-knb"><input class="wideknob3" type="range" min="70" max="100" step="1" value="99" oninput="changedotShift(this)"></label>
+
+                        <label class="padknob"><input class="sizeknob3" type="range" min="6" max="10" step="1" value="8" oninput="changedotSize3(this)"></label>
+                        <label class="padknob"><input class="sizeknob4"  type="range" min="1" max="3" step="0.1" value="2" oninput="changedotColor2(this)"></label>
+
+                        <input type="checkbox" id="myCheckbox">
+
+    <!-- Container for SVG -->
+    <div id="svgContainer">
+        <!-- Initial SVG content (wave-03.svg) -->
+        <svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="33.867mm" height="32.14mm" viewBox="0 0 96 91.106">
+            <path id="path1" d="M13.647 25.476 L82.541 25.476" stroke="rgb(95, 109, 127)" stroke-width="3" fill="none"></path>
+            <path id="path2" d="M13.609 34.215 L82.089 34.215" stroke="rgb(95, 109, 127)" stroke-width="3" fill="none"></path>
+            <path id="path3" d="M13.572 43.453 L81.637 43.453" stroke="rgb(95, 109, 127)" stroke-width="3" fill="none"></path>
+            <path id="path4" d="M13.534 52.693 L81.186 52.693" stroke="rgb(95, 109, 127)" stroke-width="3" fill="none"></path>
+            <path id="path5" d="M13.497 61.932 L80.734 61.932" stroke="rgb(95, 109, 127)" stroke-width="3" fill="none"></path>
+        </svg>
+    </div>
+
+                        
+
+
+
+                    </div>
+
+                        <div class="controls-spacers">
+
+                        <div id="scaleControls">
+                            <label>      <input id="scaleUniform" class="scaleSlider" type="range" min="1" max="4" step="0.01" value="2" oninput="changeFrameSize(this)">
+                            </label>
+                            <script>
+                           // Function to initialize the player and set it globally
+function initializePlayer() {
+  const options = {
+    userId: "harterink",
+    projectId: "golf2",
+    canvasId: "mycanvas3",
+    autoplay: true,
+  };
+
+  ndbx.embed(options, function (err, player) {
+    if (err) {
+      console.error("Error embedding player:", err);
+    } else {
+      window.player = player; // Make the player object global.
+      initializeSlider(); // Initialize slider after player is ready
+    }
+  });
+}
+
+// Function to initialize the slider and its events
+function initializeSlider() {
+  var rangeInput = document.getElementById('scaleUniform');
+  rangeInput.addEventListener('input', function() {
+    changeFrameSize(rangeInput);
+  });
+  changeFrameSize(rangeInput); // Initialize the width of the slider
+}
+
+// Function to change the frame size
+function changeFrameSize(rangeInput) {
+  var minWidth = 50;  // Minimum width of the slider in percentages
+  var maxWidth = 100; // Maximum width of the slider in percentages
+  var value = rangeInput.value;
+
+  // Calculate the new width in percentages
+  var newWidth = minWidth + ((value - rangeInput.min) / (rangeInput.max - rangeInput.min) * (maxWidth - minWidth));
+
+  // Apply the new width to the slider
+  rangeInput.style.width = newWidth + '%';
+
+  // Update the scale
+  changeframeSize(true);
+}
+
+// Function to change the frame size in the player
+function changeframeSize(isUniform) {
+  if (isUniform) {
+    const slider = document.getElementById("scaleUniform");
+    const scaleValue = parseFloat(slider.value);
+
+    if (window.player && typeof window.player.setValue === 'function') {
+      window.player.setValue("scale1", "scale", { x: scaleValue, y: scaleValue });
+    } else {
+      console.error("window.player is not defined or does not have a setValue method.");
+    }
+  }
+}
+
+// Initialize the player when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+  initializePlayer();
+});
+
+window.changeframeSize = changeframeSize;
+
+                              </script>
+                              
+                        </div>
+                        <div class="joystickcentering">
+                        <div class="joystick-container">
+                            <div class="joystick" id="joystick" style="left: 25px; top: 25px;"></div>
+                        </div>
+                        <div class="onnodigewaardes">
+                            <p>X Value: <span id="x-value">0</span></p>
+                            <p>Y Value: <span id="y-value">0</span></p>
+                          </div>
+                        <script>
+                            const joystick = document.getElementById('joystick');
+                            const joystickContainer = document.querySelector('.joystick-container');
+                            const xValueDisplay = document.getElementById('x-value');
+                            const yValueDisplay = document.getElementById('y-value');
+                            
+                            let isDragging = false;
+                            
+                            joystickContainer.addEventListener('mousedown', startDrag);
+                            joystickContainer.addEventListener('touchstart', startDrag);
+                            document.addEventListener('mousemove', drag);
+                            document.addEventListener('touchmove', drag);
+                            document.addEventListener('mouseup', endDrag);
+                            document.addEventListener('touchend', endDrag);
+                            
+                            function startDrag(e) {
+                                e.preventDefault();
+                                isDragging = true;
+                                setJoystickPosition(e);
+                            }
+                            
+                            function drag(e) {
+                                if (!isDragging) return;
+                                setJoystickPosition(e);
+                            }
+                            
+                            function endDrag() {
+                                isDragging = false;
+                            }
+                            
+                            function setJoystickPosition(e) {
+                                const containerRect = joystickContainer.getBoundingClientRect();
+                                let x = e.clientX - containerRect.left;
+                                let y = e.clientY - containerRect.top;
+                                
+                                const radius = containerRect.width / 2;
+                                const distance = Math.sqrt(Math.pow(x - radius, 2) + Math.pow(y - radius, 2));
+                                if (distance > radius) {
+                                    const angle = Math.atan2(y - radius, x - radius);
+                                    x = radius + radius * Math.cos(angle);
+                                    y = radius + radius * Math.sin(angle);
+                                }
+                                
+                                joystick.style.left = `${x}px`;
+                                joystick.style.top = `${y}px`;
+                                
+                                const normalizedX = ((x / containerRect.width) * 2) - 1;
+                                const normalizedY = ((y / containerRect.height) * 2) - 1;
+                                
+                                const multipliedX = normalizedX * 100;
+                            const multipliedY = normalizedY * 100;
+                            
+                            xValueDisplay.textContent = multipliedX.toFixed(2);
+                            yValueDisplay.textContent = multipliedY.toFixed(2);
+                                
+                                const scaleX = multipliedX;
+                                const scaleY = multipliedY;
+                                window.player.setValue("translate3", "translate", { x: scaleX, y: scaleY });
+                            }
+                        </script>
+                    </div>
+                </div>
+
+                        <!-- Add this HTML inside your body tag -->
+<div id="loadingSpinner"></div>
+
+                        <button id="downloadSvg">Laten Maken!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://unpkg.com/dropzone@6.0.0-beta.2/dist/dropzone-min.js"></script>
+        <script src="https://nodebox.live/api/v1/ndbx.js"></script>
+        <script type="module" src="golf.js"></script>
+    </div>
+    <script src="script.js"></script>
+    <script>
+               function closeModal() {
+            document.getElementById('cameraModal').style.display = 'none';
+        
+
+            // Stop the camera stream
+    const video = document.getElementById('camera');
+    const stream = video.srcObject;
+    const tracks = stream.getTracks();
+
+    tracks.forEach(function(track) {
+        track.stop();
+    });
+
+    video.srcObject = null;
+}
+    </script>
+<script>
+    // Initialize the checkbox and add the change event listener
+    const checkbox = document.getElementById('myCheckbox');
+    
+    checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            this.value = "10000";
+            this.translateValue = { x: 25, y: 25 };
+        } else {
+            this.value = "2";
+            this.translateValue = { x: 0, y: 0 };
+        }
+    });
+</script>
+<script>
+    // Initialize the checkbox and add the change event listener
+    const checkbox1 = document.getElementById('myCheckbox1');
+    
+    checkbox1.addEventListener('change', function() {
+        if (this.checked) {
+            this.value = "rgba(0, 161, 92, 0)";
+
+        } else {
+            let div = document.querySelector('.color-box3.selected');
+
+            const color = div ? div.style.backgroundColor : "rgba(0, 161, 92, 1)"; // Fallback color if div is not found
+
+// Set the stroke color of circle1 in the SVG
+                document.getElementById('paths-1').setAttribute('stroke', color);
+                document.getElementById('paths-2').setAttribute('stroke', color);
+                document.getElementById('paths-3').setAttribute('stroke', color);
+                document.getElementById('paths-4').setAttribute('stroke', color);
+                document.getElementById('paths-5').setAttribute('stroke', color);
+    this.value = color; // Set the value to the dynamically retrieved color
+
+        }
+    });
+</script>
+    <script>
+                                        
+    </script>
+    <script>
+                                                                            
+    </script>
+    <script>
+    </script>
+       
+       <script>
+        document.querySelector('input.wideknob').addEventListener('input', function(event) {
+            var rangeInput = event.target;
+            var maxSize = 50; // Maximum grootte van de knop
+            var minSize = 5;  // Minimum grootte van de knop
+            var value = rangeInput.value;
+    
+            // Bereken de nieuwe grootte voor de breedte
+            var newSize = maxSize - ((value - rangeInput.min) / (rangeInput.max - rangeInput.min) * (maxSize - minSize));
+            // Bereken de nieuwe grootte voor de hoogte als een fractie van de breedte
+            var newSize2 = maxSize - newSize + 2; // inversely proportional
+    
+            // Pas de nieuwe grootte toe op de schuifregelaar knop
+            rangeInput.style.setProperty('--width-size', newSize + 'px');
+            rangeInput.style.setProperty('--height-size', newSize2 + 'px');
+    
+            // Log de nieuwe grootte naar de console
+        });
+    
+        // Initialiseer de grootte van de knop bij het laden van de pagina
+        document.addEventListener('DOMContentLoaded', function() {
+            var rangeInput = document.querySelector('input.wideknob');
+            var maxSize = 50; // Maximum grootte van de knop
+            var minSize = 5;  // Minimum grootte van de knop
+            var value = rangeInput.value;
+    
+            // Bereken de nieuwe grootte voor de breedte
+            var newSize = maxSize - ((value - rangeInput.min) / (rangeInput.max - rangeInput.min) * (maxSize - minSize));
+            // Bereken de nieuwe grootte voor de hoogte als een fractie van de breedte
+            var newSize2 = maxSize - newSize; // inversely proportional
+    
+            // Pas de nieuwe grootte toe op de schuifregelaar knop
+            rangeInput.style.setProperty('--width-size', newSize + 'px');
+            rangeInput.style.setProperty('--height-size', newSize2 + 'px');
+        });
+    </script>
+    <script>
+        document.querySelector('input.wideknob3').addEventListener('input', function(event) {
+            var rangeInput = event.target;
+            var maxSize = 50; // Maximum grootte van de knop
+            var minSize = 5;  // Minimum grootte van de knop
+            var value = rangeInput.value;
+    
+            // Bereken de nieuwe grootte voor de breedte
+            var newSize = maxSize - ((value - rangeInput.min) / (rangeInput.max - rangeInput.min) * (maxSize - minSize));
+            // Bereken de nieuwe grootte voor de hoogte als een fractie van de breedte
+            var newSize2 = maxSize - newSize + 2; // inversely proportional
+    
+            // Pas de nieuwe grootte toe op de schuifregelaar knop
+            rangeInput.style.setProperty('--width-size', newSize + 'px');
+            rangeInput.style.setProperty('--height-size', newSize2 + 'px');
+    
+            // Log de nieuwe grootte naar de console
+        });
+    
+        // Initialiseer de grootte van de knop bij het laden van de pagina
+        document.addEventListener('DOMContentLoaded', function() {
+            var rangeInput = document.querySelector('input.wideknob');
+            var maxSize = 50; // Maximum grootte van de knop
+            var minSize = 5;  // Minimum grootte van de knop
+            var value = rangeInput.value;
+    
+            // Bereken de nieuwe grootte voor de breedte
+            var newSize = maxSize - ((value - rangeInput.min) / (rangeInput.max - rangeInput.min) * (maxSize - minSize));
+            // Bereken de nieuwe grootte voor de hoogte als een fractie van de breedte
+            var newSize2 = maxSize - newSize; // inversely proportional
+    
+            // Pas de nieuwe grootte toe op de schuifregelaar knop
+            rangeInput.style.setProperty('--width-size', newSize + 'px');
+            rangeInput.style.setProperty('--height-size', newSize2 + 'px');
+        });
+    </script>
+    
+    
+    
+    <script>
+        document.querySelector('input.wideknob2').addEventListener('input', function(event) {
+var rangeInput = event.target;
+var maxSize = 50; // Maximum grootte van de knop
+var minSize = 5;  // Minimum grootte van de knop
+var value = rangeInput.value;
+
+
+// Bereken de nieuwe grootte
+var newSize = maxSize - ((value - rangeInput.min) / (rangeInput.max - rangeInput.min) * (maxSize - minSize));
+
+// Pas de nieuwe grootte toe op de schuifregelaar knop
+rangeInput.style.setProperty('--width-size', newSize + 'px');
+
+// Log de nieuwe grootte naar de console
+});
+
+// Initialiseer de grootte van de knop bij het laden van de pagina
+document.addEventListener('DOMContentLoaded', function() {
+var rangeInput = document.querySelector('input.wideknob');
+var maxSize = 50; // Maximum grootte van de knop
+var minSize = 5;  // Minimum grootte van de knop
+var value = rangeInput.value;
+
+
+// Bereken de nieuwe grootte
+var newSize = maxSize - ((value - rangeInput.min) / (rangeInput.max - rangeInput.min) * (maxSize - minSize));
+
+// Pas de nieuwe grootte toe op de schuifregelaar knop
+rangeInput.style.setProperty('--width-size', newSize + 'px');
+
+});
+    </script>
+     <script>
+        document.querySelector('input.sizeknob3').addEventListener('input', function(event) {
+var rangeInput = event.target;
+var maxSize = 50; // Maximum grootte van de knop
+var minSize = 5;  // Minimum grootte van de knop
+var value = rangeInput.value;
+
+
+// Bereken de nieuwe grootte
+var newSize = maxSize - ((value - rangeInput.min) / (rangeInput.max - rangeInput.min) * (maxSize - minSize));
+
+// Pas de nieuwe grootte toe op de schuifregelaar knop
+rangeInput.style.setProperty('--width-size', newSize + 'px');
+
+// Log de nieuwe grootte naar de console
+});
+
+// Initialiseer de grootte van de knop bij het laden van de pagina
+document.addEventListener('DOMContentLoaded', function() {
+var rangeInput = document.querySelector('input.wideknob');
+var maxSize = 50; // Maximum grootte van de knop
+var minSize = 5;  // Minimum grootte van de knop
+var value = rangeInput.value;
+
+
+// Bereken de nieuwe grootte
+var newSize = maxSize - ((value - rangeInput.min) / (rangeInput.max - rangeInput.min) * (maxSize - minSize));
+
+// Pas de nieuwe grootte toe op de schuifregelaar knop
+rangeInput.style.setProperty('--width-size', newSize + 'px');
+
+});
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flubber/0.4.2/flubber.min.js"></script>
+
+<script>
+    const options = {
+        userId: "harterink",
+        projectId: "golf2",
+        canvasId: "mycanvas3",
+        autoplay: true,
+    };
+
+    ndbx.embed(options, function (err, player) {
+        window.player = player; // Make the player object global.
+    });
+
+
+
+    document.getElementById('svgContainer').addEventListener('click', function() {
+        const checkbox = document.getElementById('myCheckbox');
+        checkbox.checked = !checkbox.checked; // Toggle checkbox state
+        checkbox.dispatchEvent(new Event('change')); // Trigger change event
+        dotTranslate(checkbox); // Call dotTranslate function
+    });
+
+    document.getElementById('myCheckbox').addEventListener('change', function() {
+            if (this.checked) {
+                animateSvgToLines();
+            } else {
+                animateSvgToWaves();
+            }
+        });
+
+        const wavePaths = [
+            "M13.178,34.68l-.756-.654c12.117-13.984,21.342-19.697,28.203-17.466,3.884,1.263,5.866,4.785,7.784,8.192,1.896,3.368,3.856,6.851,7.663,8.188,6.206,2.178,14.768-2.089,25.458-12.684l.704.711c-10.986,10.887-19.901,15.232-26.494,12.916-4.162-1.462-6.216-5.111-8.203-8.641-1.907-3.389-3.708-6.59-7.222-7.731-6.345-2.066-15.478,3.713-27.138,17.169Z",
+            "M53.644,44.215c-.96,0-1.898-.152-2.811-.501-3.717-1.419-5.457-4.791-7.14-8.053-1.582-3.065-3.075-5.96-6.078-7.09-.362-.136-.757-.247-1.176-.331-3.793-.759-10.907,1.272-23.217,15.289l-.751-.66c10.135-11.54,18.266-16.788,24.165-15.609.471.094.919.221,1.332.376,3.363,1.265,5.016,4.469,6.614,7.566,1.597,3.095,3.248,6.295,6.608,7.578,3.589,1.369,7.884-.77,12.43-3.032,1.708-.851,3.476-1.73,5.271-2.459l.517-.211c3.957-1.61,8.048-3.278,12.168-2.703l-.138.99c-3.852-.532-7.818,1.078-11.653,2.64l-.518.21c-1.759.715-3.509,1.586-5.201,2.429-3.665,1.824-7.172,3.571-10.421,3.571Z",
+            "M48.375,54.016c-.835,0-1.652-.144-2.448-.472-3.289-1.354-4.711-4.465-6.087-7.474-1.254-2.743-2.439-5.334-4.93-6.44-.308-.137-.639-.251-1.014-.348-3.293-.855-9.549.724-20.629,13.099l-.745-.668c9.035-10.091,16.514-14.719,21.625-13.399.429.111.812.243,1.17.402,2.836,1.261,4.156,4.147,5.433,6.939,1.295,2.832,2.634,5.761,5.559,6.965,3.098,1.273,6.677-.698,10.82-2.985,3.049-1.682,6.202-3.421,9.652-4.156,4.297-.916,9.399-1.242,14.675,3.271l-.65.76c-4.943-4.23-9.759-3.917-13.816-3.052-3.305.704-6.392,2.407-9.376,4.054-3.246,1.791-6.353,3.505-9.236,3.505Z",
+            "M43.347,63.864c-.789,0-1.563-.15-2.326-.489-2.873-1.273-3.97-4.136-5.03-6.903-.93-2.426-1.808-4.717-3.794-5.789-.255-.139-.532-.256-.849-.361-3.946-1.303-10.347,2.575-18.039,10.912l-.735-.678c5.641-6.115,13.534-13.019,19.088-11.184.374.124.704.265,1.011.431,2.312,1.248,3.299,3.822,4.252,6.312,1.033,2.695,2.008,5.241,4.501,6.347,2.973,1.319,6.449-.879,10.474-3.425,3.757-2.375,8.015-5.066,12.759-5.351,6.227-.371,11.468,2.616,16.496,9.405l-.804.596c-6.316-8.53-11.95-9.222-15.632-9.003-4.487.269-8.629,2.888-12.284,5.198-3.326,2.103-6.299,3.981-9.087,3.982Z",
+            "M79.945,77.899c-5.575-9.549-11.458-14.596-17.484-15-5.541-.381-10.445,3.131-14.778,6.221-4.335,3.091-8.081,5.759-11.569,4.085-2.463-1.185-3.221-3.807-3.953-6.343-.692-2.396-1.345-4.661-3.365-5.507-3.279-1.372-8.477,1.566-15.449,8.735l-.717-.697c7.39-7.598,12.806-10.525,16.551-8.96,2.462,1.03,3.214,3.634,3.94,6.151.702,2.432,1.365,4.729,3.425,5.719,2.957,1.418,6.478-1.09,10.555-3.998,4.469-3.188,9.525-6.798,15.426-6.404,6.377.428,12.528,5.641,18.28,15.494l-.863.504Z"
+        ];
+
+        const linePaths = [
+            "M13.647 25.476 L82.541 25.476",
+            "M13.609 34.215 L82.089 34.215",
+            "M13.572 43.453 L81.637 43.453",
+            "M13.534 52.693 L81.186 52.693",
+            "M13.497 61.932 L80.734 61.932",
+            "M13.459 71.17 L80.282 71.17"
+        ];
+
+        function animateSvgToLines() {
+            const duration = 1000;
+            const startTime = performance.now();
+
+            wavePaths.forEach((wavePath, index) => {
+                const pathElement = document.getElementById(`path${index + 1}`);
+                if (pathElement) {
+                    const linePath = linePaths[index];
+                    const interpolator = flubber.interpolate(wavePath, linePath);
+
+                    function animate(time) {
+                        const elapsed = time - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        pathElement.setAttribute('d', interpolator(progress));
+
+                        if (progress < 1) {
+                            requestAnimationFrame(animate);
+                        }
+                    }
+
+                    requestAnimationFrame(animate);
+                }
+            });
+        }
+
+        function animateSvgToWaves() {
+            const duration = 1000;
+            const startTime = performance.now();
+
+            linePaths.forEach((linePath, index) => {
+                const pathElement = document.getElementById(`path${index + 1}`);
+                if (pathElement) {
+                    const wavePath = wavePaths[index];
+                    const interpolator = flubber.interpolate(linePath, wavePath);
+
+                    function animate(time) {
+                        const elapsed = time - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        pathElement.setAttribute('d', interpolator(progress));
+
+                        if (progress < 1) {
+                            requestAnimationFrame(animate);
+                        }
+                    }
+
+                    requestAnimationFrame(animate);
+                }
+            });
+        }
+
+        // Automatically trigger the change event to handle initial state
+        document.getElementById('myCheckbox').dispatchEvent(new Event('change'));
+
+
+</script>
+<script>
+    const options1 = {
+        userId: "harterink",
+        projectId: "golf2",
+        canvasId: "mycanvas3",
+        autoplay: true,
+    };
+
+    ndbx.embed(options1, function (err, player) {
+        window.player = player; // Make the player object global.
+    });
+
+
+
+    document.getElementById('svgContainer1').addEventListener('click', function() {
+        const checkbox1 = document.getElementById('myCheckbox1');
+        checkbox1.checked = !checkbox1.checked; // Toggle checkbox state
+        checkbox1.dispatchEvent(new Event('change')); // Trigger change event
+        dotTranslate10(checkbox1); // Call dotTranslate function
+    });
+
+    document.getElementById('myCheckbox1').addEventListener('change', function() {
+            if (this.checked) {
+                animateSvgToLines1();
+            } else {
+                animateSvgToWaves1();
+            }
+        });
+
+        const wavePaths1 = [
+            "M13.178,34.68l-.756-.654c12.117-13.984,21.342-19.697,28.203-17.466,3.884,1.263,5.866,4.785,7.784,8.192,1.896,3.368,3.856,6.851,7.663,8.188,6.206,2.178,14.768-2.089,25.458-12.684l.704.711c-10.986,10.887-19.901,15.232-26.494,12.916-4.162-1.462-6.216-5.111-8.203-8.641-1.907-3.389-3.708-6.59-7.222-7.731-6.345-2.066-15.478,3.713-27.138,17.169Z",
+            "M53.644,44.215c-.96,0-1.898-.152-2.811-.501-3.717-1.419-5.457-4.791-7.14-8.053-1.582-3.065-3.075-5.96-6.078-7.09-.362-.136-.757-.247-1.176-.331-3.793-.759-10.907,1.272-23.217,15.289l-.751-.66c10.135-11.54,18.266-16.788,24.165-15.609.471.094.919.221,1.332.376,3.363,1.265,5.016,4.469,6.614,7.566,1.597,3.095,3.248,6.295,6.608,7.578,3.589,1.369,7.884-.77,12.43-3.032,1.708-.851,3.476-1.73,5.271-2.459l.517-.211c3.957-1.61,8.048-3.278,12.168-2.703l-.138.99c-3.852-.532-7.818,1.078-11.653,2.64l-.518.21c-1.759.715-3.509,1.586-5.201,2.429-3.665,1.824-7.172,3.571-10.421,3.571Z",
+            "M48.375,54.016c-.835,0-1.652-.144-2.448-.472-3.289-1.354-4.711-4.465-6.087-7.474-1.254-2.743-2.439-5.334-4.93-6.44-.308-.137-.639-.251-1.014-.348-3.293-.855-9.549.724-20.629,13.099l-.745-.668c9.035-10.091,16.514-14.719,21.625-13.399.429.111.812.243,1.17.402,2.836,1.261,4.156,4.147,5.433,6.939,1.295,2.832,2.634,5.761,5.559,6.965,3.098,1.273,6.677-.698,10.82-2.985,3.049-1.682,6.202-3.421,9.652-4.156,4.297-.916,9.399-1.242,14.675,3.271l-.65.76c-4.943-4.23-9.759-3.917-13.816-3.052-3.305.704-6.392,2.407-9.376,4.054-3.246,1.791-6.353,3.505-9.236,3.505Z",
+            "M43.347,63.864c-.789,0-1.563-.15-2.326-.489-2.873-1.273-3.97-4.136-5.03-6.903-.93-2.426-1.808-4.717-3.794-5.789-.255-.139-.532-.256-.849-.361-3.946-1.303-10.347,2.575-18.039,10.912l-.735-.678c5.641-6.115,13.534-13.019,19.088-11.184.374.124.704.265,1.011.431,2.312,1.248,3.299,3.822,4.252,6.312,1.033,2.695,2.008,5.241,4.501,6.347,2.973,1.319,6.449-.879,10.474-3.425,3.757-2.375,8.015-5.066,12.759-5.351,6.227-.371,11.468,2.616,16.496,9.405l-.804.596c-6.316-8.53-11.95-9.222-15.632-9.003-4.487.269-8.629,2.888-12.284,5.198-3.326,2.103-6.299,3.981-9.087,3.982Z",
+            "M79.945,77.899c-5.575-9.549-11.458-14.596-17.484-15-5.541-.381-10.445,3.131-14.778,6.221-4.335,3.091-8.081,5.759-11.569,4.085-2.463-1.185-3.221-3.807-3.953-6.343-.692-2.396-1.345-4.661-3.365-5.507-3.279-1.372-8.477,1.566-15.449,8.735l-.717-.697c7.39-7.598,12.806-10.525,16.551-8.96,2.462,1.03,3.214,3.634,3.94,6.151.702,2.432,1.365,4.729,3.425,5.719,2.957,1.418,6.478-1.09,10.555-3.998,4.469-3.188,9.525-6.798,15.426-6.404,6.377.428,12.528,5.641,18.28,15.494l-.863.504Z"
+        ];
+
+        const linePaths1 = [
+            "M13.647 25.476 L82.541 25.476",
+            "M13.609 34.215 L82.089 34.215",
+            "M13.572 43.453 L81.637 43.453",
+            "M13.534 52.693 L81.186 52.693",
+            "M13.497 61.932 L80.734 61.932",
+            "M13.459 71.17 L80.282 71.17"
+        ];
+
+        function animateSvgToLines1() {
+            const duration = 1000;
+            const startTime = performance.now();
+
+            wavePaths1.forEach((wavePath, index) => {
+                const pathElement = document.getElementById(`paths-${index + 1}`);
+                if (pathElement) {
+                    const linePath1 = linePaths1[index];
+                    const interpolator1 = flubber.interpolate(wavePath, linePath1);
+
+                    function animate(time) {
+                        const elapsed1 = time - startTime;
+                        const progress1 = Math.min(elapsed1 / duration, 1);
+                        pathElement.setAttribute('d', interpolator1(progress1));
+                        pathElement.setAttribute('stroke-width', '0'); // Set stroke width
+
+
+
+                        if (progress1 < 1) {
+                            requestAnimationFrame(animate);
+                        }
+                    }
+
+                    requestAnimationFrame(animate);
+                }
+            });
+        }
+
+        function animateSvgToWaves1() {
+            const duration = 1000;
+            const startTime = performance.now();
+
+            let div = document.querySelector('.color-box3.selected');
+
+            const color = div.style.backgroundColor;
+
+// Set the stroke color of circle1 in the SVG
+                            document.getElementById('paths-1').setAttribute('stroke', color);
+                            document.getElementById('paths-2').setAttribute('stroke', color);
+                            document.getElementById('paths-3').setAttribute('stroke', color);
+                            document.getElementById('paths-4').setAttribute('stroke', color);
+                            document.getElementById('paths-5').setAttribute('stroke', color);
+
+            linePaths1.forEach((linePath, index) => {
+                const pathElement = document.getElementById(`paths-${index + 1}`);
+                if (pathElement) {
+                    const wavePath = wavePaths1[index];
+                    const interpolator = flubber.interpolate(linePath, wavePath);
+
+                    function animate(time) {
+                        const elapsed = time - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        pathElement.setAttribute('d', interpolator(progress));
+                        pathElement.setAttribute('stroke', color); // Set stroke color dynamically
+                        pathElement.setAttribute('stroke-width', '3'); // Set stroke width
+
+                        if (progress < 1) {
+                            requestAnimationFrame(animate);
+                        }
+                    }
+
+                    requestAnimationFrame(animate);
+                }
+            });
+        }
+
+        // Automatically trigger the change event to handle initial state
+        document.getElementById('myCheckbox1').dispatchEvent(new Event('change'));
+
+
+</script>
+<script>
+    // Get the custom modal
+    var customModal = document.getElementById("customModal");
+
+    // Get the button that opens the custom modal
+    var btn = document.getElementById("contact-link");
+
+    // Get the <span> element that closes the custom modal
+    var span = document.getElementsByClassName("custom-close")[0];
+
+    // When the user clicks the button, open the custom modal 
+    btn.onclick = function(event) {
+        event.preventDefault(); // Prevent default anchor behavior
+        customModal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the custom modal
+    span.onclick = function() {
+        customModal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the custom modal, close it
+    window.onclick = function(event) {
+        if (event.target == customModal) {
+            customModal.style.display = "none";
+        }
+    }
+</script>
+</body>
+</html>
