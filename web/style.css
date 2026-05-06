@@ -681,16 +681,19 @@ svg:hover {
     /* Custom Modal Content/Box */
     .custom-modal-content {
         background-color: #fefefe;
-        margin: 15% auto; /* 15% from the top and centered */
-        padding: 20px;
-        width: 30%; /* Adjust as needed */
-        position: relative; /* Relative positioning for the close button */
+        margin: 8% auto;
+        padding: 24px;
+        width: 50%;
+        min-width: 380px;
+        max-width: 700px;
+        box-sizing: border-box;
+        position: relative;
         display: flex;
         flex-direction: row;
         align-items: flex-start;
-        justify-content: space-between;
+        gap: 20px;
     }
-    
+
     /* The Close Button */
     .custom-close {
         color: #aaa;
@@ -699,37 +702,39 @@ svg:hover {
         top: 1px;
         right: 10px;
     }
-    
+
     .custom-close:hover,
     .custom-close:focus {
         color: black;
         text-decoration: none;
         cursor: pointer;
     }
-    
+
     /* Content styles */
     .left-section {
         display: flex;
         flex-direction: column;
-        width: 30%;
+        align-items: center;
+        flex-shrink: 0;
     }
-    
+
     .left-section img.profile-picture {
         border-radius: 50%;
-        width: 150px;
-        height: 150px;
-        margin-bottom: 20px;
+        width: 120px;
+        height: 120px;
+        margin-bottom: 16px;
     }
-    
+
     .left-section img.qr-code {
-        width: 150px;
-        height: 150px;
+        width: 120px;
+        height: 120px;
     }
-    
+
     .right-section {
-        width: 70%;
+        flex: 1;
+        min-width: 0;
     }
-    
+
     .right-section h1 {
         display: flex;
         align-items: center;
@@ -737,13 +742,13 @@ svg:hover {
         font-weight: 500;
         margin: 0px;
     }
-    
+
     .right-section h1 img {
         width: 30px;
         height: 30px;
         margin-right: 10px;
     }
-    
+
     .right-section p {
         font-size: 16px;
         line-height: 1.5;
@@ -779,4 +784,116 @@ svg:hover {
   right: 10px;
   font-size: 24px;
   cursor: pointer;
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media (max-width: 1250px) {
+  .main-content {
+    gap: 30px;
+  }
+}
+
+@media (max-width: 900px) {
+  #content {
+    height: auto;
+    min-height: 100vh;
+    padding-top: 70px;
+    padding-bottom: 30px;
+    overflow-y: auto;
+    justify-content: flex-start;
+  }
+
+  .main-wrapper {
+    height: auto;
+    align-items: flex-start;
+    padding: 0 16px;
+  }
+
+  .main-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+  }
+
+  canvas {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 800 / 595;
+  }
+
+  .sidebar {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  #drop_zone {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .nav-links {
+    gap: 12px;
+    margin-right: 10px;
+  }
+
+  nav .site-title {
+    display: none;
+  }
+
+  .custom-modal-content {
+    width: 80%;
+    min-width: unset;
+  }
+}
+
+@media (max-width: 600px) {
+  nav .nav-links a {
+    font-size: 0.9em;
+  }
+
+  .nav-links {
+    gap: 8px;
+    margin-right: 5px;
+  }
+
+  .main-wrapper {
+    padding: 0 10px;
+  }
+
+  .custom-modal-content {
+    width: 92%;
+    flex-direction: column;
+    align-items: center;
+    margin: 12% auto;
+    gap: 12px;
+  }
+
+  .left-section {
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .left-section img.profile-picture,
+  .left-section img.qr-code {
+    width: 75px;
+    height: 75px;
+    margin-bottom: 0;
+  }
+
+  .right-section {
+    width: 100%;
+  }
+
+  .right-section h1 {
+    font-size: 18px;
+  }
+
+  .right-section p {
+    font-size: 14px;
+  }
 }
