@@ -157,6 +157,7 @@ nav {
   position: fixed;
   top: 0;
   width: 100%;
+  box-sizing: border-box;
   background-color: #fff;
   display: flex;
   justify-content: space-between;
@@ -800,6 +801,7 @@ svg:hover {
     height: auto;
     align-items: flex-start;
     padding: 0 16px;
+    box-sizing: border-box;
   }
 
   .main-content {
@@ -853,6 +855,7 @@ svg:hover {
 
   .main-wrapper {
     padding: 0 10px;
+    box-sizing: border-box;
   }
 
   .custom-modal-content {
