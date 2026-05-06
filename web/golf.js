@@ -66,6 +66,8 @@ function changedotSize3(e) {
 window.changedotSize3 = changedotSize3;
 function changedotColor(e) {
   window.player.setValue("colorize1", "stroke", e.value);
+  window.parent.postMessage({ type: 'colorSelect', color: e.value }, '*');
+
 }
 window.changedotColor = changedotColor;
 function changedotColor2(e) {
