@@ -744,6 +744,34 @@ svg:hover {
         font-weight: 400;
     }
 
+/* ===================== HEIGHT RESPONSIVE ===================== */
+
+@media (max-height: 720px) {
+  nav {
+    padding: 5px 20px;
+  }
+
+  #content {
+    padding-top: 52px;
+  }
+
+  .sidebar {
+    gap: 8px;
+  }
+
+  #drop_zone {
+    height: 90px;
+  }
+
+  .controls .controls-spacers {
+    margin-bottom: 20px;
+  }
+
+  .controls .controls-spacers:nth-child(5) {
+    margin-bottom: 20px;
+  }
+}
+
 /* ===================== RESPONSIVE ===================== */
 
 @media (max-width: 1250px) {

@@ -876,6 +876,34 @@ padding-top: 5px;
   margin-bottom: 15px;
 } */
 
+/* ===================== HEIGHT RESPONSIVE ===================== */
+
+@media (max-height: 720px) {
+  nav {
+    padding: 5px 20px;
+  }
+
+  #content {
+    padding-top: 52px;
+  }
+
+  .sidebar {
+    gap: 8px;
+  }
+
+  #drop_zone {
+    height: 90px;
+  }
+
+  .controls .controls-spacers {
+    margin-bottom: 8px;
+  }
+
+  .controls .controls-spacers:nth-child(5) {
+    margin-bottom: 8px;
+  }
+}
+
 /* ===================== RESPONSIVE ===================== */
 
 @media (max-width: 1250px) {
