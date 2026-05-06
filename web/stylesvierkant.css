@@ -755,6 +755,10 @@ svg:hover {
     padding-top: 52px;
   }
 
+  .main-wrapper {
+    height: auto;
+  }
+
   .sidebar {
     gap: 8px;
   }
