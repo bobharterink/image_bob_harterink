@@ -5,6 +5,8 @@ import {
   addDoc,
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
 
+const UPLOAD_ENABLED = false;
+
 const firebaseConfig = {
   apiKey: "AIzaSyBp00MZ3SNa5ezQK5tHzc5pZQqAD35gUvs",
   authDomain: "axidrawer.firebaseapp.com",
@@ -87,6 +89,7 @@ function changeframeSize(isUniform) {
 window.changeframeSize = changeframeSize;
 
 document.getElementById("downloadSvg").addEventListener("click", async () => {
+  if (!UPLOAD_ENABLED) return;
   // Show the loading spinner
   /*   const loadingSpinner = document.getElementById("loadingSpinner");
   loadingSpinner.style.display = "block"; */

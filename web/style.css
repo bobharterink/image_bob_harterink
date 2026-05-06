@@ -446,7 +446,6 @@ background-color: var(--hover-bg-color);
   cursor: pointer;
 }
 .selected {
-  border: 1px solid #FFFFFF;
 border-radius: 5px;
 height: 15px;
 /* animation: height15 1s forwards; Pas de animatie toe met een duur van 2 seconden */
