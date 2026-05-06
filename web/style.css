@@ -794,11 +794,13 @@ svg:hover {
   }
 
   #content {
+    height: auto;
     padding-top: 52px;
   }
 
   .main-wrapper {
     height: auto;
+    padding-top: 20px;
   }
 
   .sidebar {
